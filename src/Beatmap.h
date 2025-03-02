@@ -27,6 +27,7 @@ struct HitObjectData {
     std::string extras;
 
     int comboNumber;
+
 };
 
 
