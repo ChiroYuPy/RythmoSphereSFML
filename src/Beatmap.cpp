@@ -4,8 +4,6 @@
 
 #include "Beatmap.h"
 
-
-
 const std::string& Beatmap::getTitle() const { return title; }
 const std::string& Beatmap::getArtist() const { return artist; }
 const std::string& Beatmap::getMapper() const { return mapper; }
@@ -25,12 +23,14 @@ int Beatmap::getBeatmapStartTime() const {
 
 Beatmap::Beatmap(const std::string& title, const std::string& artist, const std::string& mapper,
         const std::vector<HitObjectData>& hitObjectData,
+        const std::vector<sf::Color>& comboColors,
         const std::vector<TimingPoint>& timingPoints,
         float approachRate, float overallDifficulty, float circleSize) {
     this->title = title;
     this->artist = artist;
     this->mapper = mapper;
     this->hitObjectData = hitObjectData;
+    this->comboColors = comboColors;
     this->timingPoints = timingPoints;
     this->approachRate = approachRate;
     this->overallDifficulty = overallDifficulty;

@@ -62,13 +62,17 @@ void GameManager::loadBeatmap(const std::string& beatmapPath, const std::string&
     beatmapPlaying = false;
 }
 
+void GameManager::setBeatmapTime(int beatmapTime) {
+    if (beatmapTime > 0.0) {
+        music.setPlayingOffset(music.getPlayingOffset() + sf::milliseconds(beatmapTime));
+        currentTimeMiliseconds = static_cast<float>(beatmapTime);
+    }
+}
+
 void GameManager::skipIntroduction() {
     int skipTime = currentBeatmap.getBeatmapStartTime() - (hitWindowOffset + skipStartReactionOffset);
     std::cout << "Introduction started!" << std::endl;
-    if (skipTime > 0.0) {
-        music.setPlayingOffset(music.getPlayingOffset() + sf::milliseconds(skipTime));
-        currentTimeMiliseconds = static_cast<float>(skipTime);
-    }
+    setBeatmapTime(skipTime);
 }
 
 void GameManager::update(float deltaTime) {

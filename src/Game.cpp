@@ -26,6 +26,16 @@ void Game::run() {
 
     TextureManager::loadTexture("hitCircle", "hitcircle.png");
     TextureManager::loadTexture("hitCircleOverlay", "hitcircleoverlay@2x.png");
+    TextureManager::loadTexture("0", "default-0@2x.png");
+    TextureManager::loadTexture("1", "default-1@2x.png");
+    TextureManager::loadTexture("2", "default-2@2x.png");
+    TextureManager::loadTexture("3", "default-3@2x.png");
+    TextureManager::loadTexture("4", "default-4@2x.png");
+    TextureManager::loadTexture("5", "default-5@2x.png");
+    TextureManager::loadTexture("6", "default-6@2x.png");
+    TextureManager::loadTexture("7", "default-7@2x.png");
+    TextureManager::loadTexture("8", "default-8@2x.png");
+    TextureManager::loadTexture("9", "default-9@2x.png");
 
     sf::Clock clock;
     const float targetFPS = 240.0f;

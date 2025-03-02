@@ -1,13 +1,15 @@
 #include "Renderer.h"
+
+#include <iostream>
+
 #include "TextureManager.h"
 #include <SFML/Graphics.hpp>
 
 void Renderer::drawHitObject(sf::RenderWindow& window, const HitObject& hitCircle) {
-    // Appel des méthodes pour dessiner les deux parties de l'objet
-    drawHitCircle(window, hitCircle);
 
-    // Ici, on passe une couleur spécifique pour l'overlay, par exemple, rouge
-    drawHitCircleOverlay(window, hitCircle, sf::Color::Red);  // Ou toute autre couleur
+    drawHitCircle(window, hitCircle);
+    drawHitCircleOverlay(window, hitCircle, sf::Color::Red);
+    drawComboOverlay(window, hitCircle, sf::Color::White);
 }
 
 void Renderer::drawHitCircle(sf::RenderWindow& window, const HitObject& hitCircle) {
@@ -68,4 +70,52 @@ void Renderer::drawHitCircleOverlay(sf::RenderWindow& window, const HitObject& h
 
     // Dessiner le hitCircleOverlay
     window.draw(hitCircleOverlaySprite);
+}
+
+void Renderer::drawComboOverlay(sf::RenderWindow& window, const HitObject& hitCircle, const sf::Color& overlayColor) {
+    GameManager& gameManager = GameManager::getInstance();
+
+    int combo = hitCircle.data.comboNumber;
+    std::string comboStr = std::to_string(combo);
+
+    // Position du centre du hitCircle
+    float x = static_cast<float>(hitCircle.data.x);
+    float y = static_cast<float>(hitCircle.data.y);
+    sf::Vector2f windowPos = gameManager.getPlayground().convertPlaygroundToWindowPosition(sf::Vector2f(x, y));
+
+    // Calculer le rayon du hitCircle
+    float radius = gameManager.GetHitObjectSize() * gameManager.getPlayground().getZoom();
+
+    std::vector<sf::Sprite> digitSprites;
+
+    // Créer les sprites des chiffres et calculer la largeur totale
+    for (char c : comboStr) {
+        std::string textureName = std::to_string(c - '0');
+        sf::Sprite digitSprite;
+        digitSprite.setTexture(TextureManager::getTexture(textureName));
+
+        // Ajuster la taille des chiffres pour qu'ils aient la hauteur égale à celle du radius
+        float scale = radius * 2.0f / digitSprite.getLocalBounds().height;
+        digitSprite.setScale(scale, scale);
+
+        digitSprites.push_back(digitSprite);
+    }
+
+    int numDigit = comboStr.size();
+
+    // Calculer l'offset X pour centrer les chiffres
+    float spaceFactor = 0.25f;
+    float offsetX = -(radius * (numDigit - 1) * spaceFactor);
+
+    // Dessiner les chiffres un par un
+    for (sf::Sprite& digitSprite : digitSprites) {
+        digitSprite.setPosition(windowPos.x - radius + offsetX, windowPos.y - radius);
+
+        // Appliquer la couleur et dessiner le sprite
+        digitSprite.setColor(overlayColor);
+        window.draw(digitSprite);
+
+        // Mettre à jour l'offset pour le prochain chiffre
+        offsetX += digitSprite.getLocalBounds().width * digitSprite.getScale().x * spaceFactor; // utiliser l'échelle pour la largeur
+    }
 }

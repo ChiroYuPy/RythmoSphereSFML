@@ -52,6 +52,8 @@ private:
 
 	void loadBeatmap(const std::string &beatmapPath, const std::string &musicPath);
 
+	void setBeatmapTime(int beatmapTime);
+
 	void skipIntroduction();
 
 	void spawnHitObject(HitObjectData data);

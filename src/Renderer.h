@@ -17,6 +17,8 @@ public:
     static void drawHitCircle(sf::RenderWindow &window, const HitObject &hitCircle);
 
     static void drawHitCircleOverlay(sf::RenderWindow &window, const HitObject &hitCircle, const sf::Color &overlayColor);
+
+    static void drawComboOverlay(sf::RenderWindow &window, const HitObject &hitCircle, const sf::Color &overlayColor);
 };
 
 
