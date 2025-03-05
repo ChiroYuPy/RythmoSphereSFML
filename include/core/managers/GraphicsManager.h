@@ -7,23 +7,26 @@
 #ifndef GRAPHICSMANAGER_H
 #define GRAPHICSMANAGER_H
 
-class Game;
-
+#include "../graphics/Drawable.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <vector>
+
+class Game;
 
 class GraphicsManager {
 public:
     explicit GraphicsManager(Game& game);
 
     void render() const;
-    void clear() const;
+    void addDrawable(const std::shared_ptr<Drawable>& drawable);
 
     sf::RenderWindow& getWindow() const;
 
 private:
     Game& game;
     std::unique_ptr<sf::RenderWindow> window;
+    std::vector<std::shared_ptr<Drawable>> drawables;
 };
 
 #endif //GRAPHICSMANAGER_H

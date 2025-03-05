@@ -8,20 +8,20 @@
 #define DRAWABLEHITOBJECT_H
 
 #include "Drawable.h"
+#include "../objects/HitObject.h"
 
-class DrawableHitObject final : public Drawable {
+class DrawableHitObject : public Drawable {
 public:
-    DrawableHitObject();
+    explicit DrawableHitObject(HitObject* hitObject);
 
-    void draw() const override;
+    void draw() const override = 0;
     void update(float deltaTime) override;
 
     bool isHit() const;
     void onHit();
 
-private:
-    float positionX, positionY;
-    float hitTime;
+protected:
+    HitObject* hitObject;
+    bool hit;
 };
-
 #endif //DRAWABLEHITOBJECT_H
