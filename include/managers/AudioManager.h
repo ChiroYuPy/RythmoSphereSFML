@@ -7,12 +7,14 @@
 #ifndef AUDIOMANAGER_H
 #define AUDIOMANAGER_H
 
+class Game;
+
 #include <string>
 #include <SFML/Audio.hpp>
 
 class AudioManager {
 public:
-    AudioManager();
+    explicit AudioManager(Game& game);
 
     void loadMusic(const std::string& file);
     void playMusic();
@@ -21,6 +23,7 @@ public:
     float getSongPosition() const;
 
 private:
+    Game& game;
     sf::Music music;
 };
 

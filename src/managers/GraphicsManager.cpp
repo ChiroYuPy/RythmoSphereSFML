@@ -4,7 +4,7 @@
 
 #include "../../include/managers/GraphicsManager.h"
 
-GraphicsManager::GraphicsManager() {
+GraphicsManager::GraphicsManager(Game& game) : game(game) {
     window = std::make_unique<sf::RenderWindow>(sf::VideoMode(800, 600), "SFML Game");
 }
 

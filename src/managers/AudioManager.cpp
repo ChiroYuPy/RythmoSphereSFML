@@ -4,6 +4,6 @@
 
 #include "../../include/managers/AudioManager.h"
 
-AudioManager::AudioManager() {
+AudioManager::AudioManager(Game& game) : game(game) {
 
 }

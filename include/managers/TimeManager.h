@@ -7,13 +7,16 @@
 #ifndef TIMEMANAGER_H
 #define TIMEMANAGER_H
 
+class Game;
+
 class TimeManager {
 public:
-    TimeManager();
+    explicit TimeManager(Game& game);
 
     void update();
     float getDeltaTime() const;
 private:
+    Game& game;
     float lastTime;
     float deltaTime;
 };

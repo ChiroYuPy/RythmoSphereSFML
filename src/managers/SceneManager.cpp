@@ -9,7 +9,7 @@
 #include "../../include/scenes/MainScene.h"
 #include "../../include/scenes/GameScene.h"
 
-SceneManager::SceneManager() {
+SceneManager::SceneManager(Game& game) : game(game) {
     sceneCache[SceneType::Main] = std::make_shared<MainScene>();
     sceneCache[SceneType::Game] = std::make_shared<GameScene>();
 }

@@ -4,5 +4,5 @@
 
 #include "../../include/managers/TimeManager.h"
 
-TimeManager::TimeManager(): lastTime(0), deltaTime(0) {
+TimeManager::TimeManager(Game& game) : game(game), lastTime(0), deltaTime(0) {
 }

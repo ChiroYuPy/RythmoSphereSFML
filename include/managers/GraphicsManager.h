@@ -7,12 +7,14 @@
 #ifndef GRAPHICSMANAGER_H
 #define GRAPHICSMANAGER_H
 
+class Game;
+
 #include <SFML/Graphics.hpp>
 #include <memory>
 
 class GraphicsManager {
 public:
-    GraphicsManager();
+    explicit GraphicsManager(Game& game);
 
     void render() const;
     void clear() const;
@@ -20,6 +22,7 @@ public:
     sf::RenderWindow& getWindow() const;
 
 private:
+    Game& game;
     std::unique_ptr<sf::RenderWindow> window;
 };
 

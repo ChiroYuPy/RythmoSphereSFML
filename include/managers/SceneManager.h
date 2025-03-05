@@ -7,6 +7,8 @@
 #ifndef SCENEMANAGER_H
 #define SCENEMANAGER_H
 
+class Game;
+
 #include <memory>
 #include <map>
 
@@ -15,12 +17,13 @@
 
 class SceneManager {
 public:
-    SceneManager();
+    explicit SceneManager(Game& game);
 
     void changeScene(SceneType sceneType);
     std::shared_ptr<Scene> getCurrentScene();
 
 private:
+    Game& game;
 	std::shared_ptr<Scene> currentScene;
     std::map<SceneType, std::shared_ptr<Scene>> sceneCache;
 };
