@@ -9,13 +9,13 @@ find_package(SFML 2.6 COMPONENTS graphics window system audio REQUIRED)
 add_executable(RythmoSphere
         main.cpp
         src/core/Game.cpp
-        src/graphics/DrawableHitObject.cpp
-        src/managers/AudioManager.cpp
-        src/managers/GraphicsManager.cpp
-        src/managers/SceneManager.cpp
-        src/managers/TimeManager.cpp
-        src/scenes/GameScene.cpp
-        src/scenes/MainScene.cpp
+        src/core/graphics/DrawableHitObject.cpp
+        src/core/managers/AudioManager.cpp
+        src/core/managers/GraphicsManager.cpp
+        src/core/managers/SceneManager.cpp
+        src/core/managers/TimeManager.cpp
+        src/core/scenes/GameScene.cpp
+        src/core/scenes/MainScene.cpp
 )
 
 target_link_libraries(RythmoSphere sfml-graphics sfml-window sfml-system sfml-audio)

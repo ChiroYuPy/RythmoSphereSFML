@@ -2,7 +2,7 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../include/scenes/GameScene.h"
+#include "../../../include/core/scenes/GameScene.h"
 
 void GameScene::initialize() {
     songPosition = 0.0f;

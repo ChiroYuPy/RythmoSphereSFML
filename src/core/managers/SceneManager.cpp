@@ -4,10 +4,10 @@
 
 #include <iostream>
 
-#include "../../include/managers/SceneManager.h"
-#include "../../include/scenes/SceneType.h"
-#include "../../include/scenes/MainScene.h"
-#include "../../include/scenes/GameScene.h"
+#include "../../../include/core/managers/SceneManager.h"
+#include "../../../include/core/scenes/SceneType.h"
+#include "../../../include/core/scenes/MainScene.h"
+#include "../../../include/core/scenes/GameScene.h"
 
 SceneManager::SceneManager(Game& game) : game(game) {
     sceneCache[SceneType::Main] = std::make_shared<MainScene>();

@@ -2,7 +2,7 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../include/managers/GraphicsManager.h"
+#include "../../../include/core/managers/GraphicsManager.h"
 
 GraphicsManager::GraphicsManager(Game& game) : game(game) {
     window = std::make_unique<sf::RenderWindow>(sf::VideoMode(800, 600), "SFML Game");

@@ -2,7 +2,7 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../include/scenes/MainScene.h"
+#include "../../../include/core/scenes/MainScene.h"
 
 void MainScene::initialize() {
 }
