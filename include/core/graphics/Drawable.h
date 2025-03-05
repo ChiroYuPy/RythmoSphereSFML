@@ -7,11 +7,13 @@
 #ifndef DRAWABLE_H
 #define DRAWABLE_H
 
+#include <SFML/Graphics.hpp>
+
 class Drawable {
 public:
     virtual ~Drawable() = default;
 
-    virtual void draw() const = 0;
+    virtual void draw(sf::RenderWindow& window) const = 0;
     virtual void update(float deltaTime) = 0;
 };
 

@@ -8,7 +8,7 @@
 
 DrawableHitCircle::DrawableHitCircle(HitCircle* hitCircle) : DrawableHitObject(hitCircle) {}
 
-void DrawableHitCircle::draw() const {
+void DrawableHitCircle::draw(sf::RenderWindow& window) const {
     auto* circle = static_cast<HitCircle*>(hitObject);
     std::cout << "Dessine un cercle à (" << circle->getX()
               << ", " << circle->getY()

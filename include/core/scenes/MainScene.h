@@ -8,16 +8,25 @@
 #define MAINSCENE_H
 
 #include "Scene.h"
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <memory>
+
+#include "../graphics/Label.h"
 
 class MainScene final : public Scene {
 public:
-    MainScene() = default;
+    explicit MainScene(Game& game);
 
     void initialize() override;
     void update(float deltaTime) override;
-    void render() override;
+    void handleEvent(const sf::Event& event) override;
     void onEnter() override;
     void onExit() override;
+
+private:
+    Game& game;
+    sf::Font font;
 };
 
 #endif //MAINSCENE_H

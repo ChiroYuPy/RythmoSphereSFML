@@ -16,6 +16,7 @@ void Game::run() const {
     sf::Clock clock;
 
     sceneManager->changeScene(SceneType::Main);
+    sceneManager->changeScene(SceneType::Game);
 
     while (graphicsManager->getWindow().isOpen()) {
         sf::Time deltaTime = clock.restart();
@@ -28,10 +29,6 @@ void Game::run() const {
         }
 
         sceneManager->getCurrentScene()->update(deltaTime.asSeconds());
-
-        graphicsManager->clear();
-
-        sceneManager->getCurrentScene()->render();
 
         graphicsManager->render();
     }

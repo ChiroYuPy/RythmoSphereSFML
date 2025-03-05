@@ -3,8 +3,7 @@ project(RythmoSphere)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
-find_package(SFML 2.6 COMPONENTS graphics window system audio REQUIRED)
+find_package(SFML 2.6.1 COMPONENTS graphics window system audio REQUIRED)
 
 add_executable(RythmoSphere
         main.cpp
@@ -19,5 +18,8 @@ add_executable(RythmoSphere
         src/core/objects/HitCircle.cpp
         src/core/graphics/DrawableHitObject.cpp
         src/core/graphics/DrawableHitCircle.cpp
+        src/core/graphics/Label.cpp
+        src/core/graphics/Button.cpp
+
 )
 target_link_libraries(RythmoSphere sfml-graphics sfml-window sfml-system sfml-audio)
