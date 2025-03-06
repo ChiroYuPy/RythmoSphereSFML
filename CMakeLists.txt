@@ -21,5 +21,7 @@ add_executable(RythmoSphere
         src/core/graphics/DrawableHitCircle.cpp
         src/core/graphics/Label.cpp
         src/core/graphics/Button.cpp
+        src/core/transform/Transform.cpp
+        src/core/transform/Transformable.cpp
 )
 target_link_libraries(RythmoSphere sfml-graphics sfml-window sfml-system sfml-audio)
