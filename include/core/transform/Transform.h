@@ -13,7 +13,7 @@ public:
 
     void update(float currentTime);
 
-    float getValue() const { return currentValue; }
+    float getValue() const;
 
 private:
     float startValue, maxValue, currentValue;

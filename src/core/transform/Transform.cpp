@@ -2,12 +2,14 @@
 // Created by adrian on 06/03/25.
 //
 
+#include <utility>
+
 #include "../../../include/core/transform/Transform.h"
 
-Transform::Transform(float startValue, float maxValue, std::function<float(float)> function, float startTime, float durationTime, int loopCount, bool rewinded)
-        : startValue(startValue), maxValue(maxValue), function(function), startTime(startTime), durationTime(durationTime), loopCount(loopCount), rewinded(false), currentValue(startValue), finished(false), looped(0) {}
+Transform::Transform(const float startValue, const float maxValue, std::function<float(float)> function, const float startTime, const float durationTime, const int loopCount, bool rewinded)
+        : startValue(startValue), maxValue(maxValue), currentValue(startValue), function(std::move(function)), startTime(startTime), durationTime(durationTime), loopCount(loopCount), looped(0), rewinded(false), finished(false) {}
 
-void Transform::update(float currentTime) {
+void Transform::update(const float currentTime) {
     if (finished) return;
 
     float elapsedTime = currentTime - startTime;
@@ -24,7 +26,11 @@ void Transform::update(float currentTime) {
         }
     }
 
-    float timeProgress = std::clamp(elapsedTime / durationTime, 0.0f, 1.0f);
-    float deltaValue = function(timeProgress) * (maxValue - startValue);
+    const float timeProgress = std::clamp(elapsedTime / durationTime, 0.0f, 1.0f);
+    const float deltaValue = function(timeProgress) * (maxValue - startValue);
     currentValue = startValue + deltaValue;
+}
+
+float Transform::getValue() const {
+  return currentValue;
 }

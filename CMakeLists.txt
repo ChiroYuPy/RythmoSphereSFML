@@ -24,4 +24,9 @@ add_executable(RythmoSphere
         src/core/transform/Transform.cpp
         src/core/transform/Transformable.cpp
 )
-target_link_libraries(RythmoSphere sfml-graphics sfml-window sfml-system sfml-audio)
+target_link_libraries(RythmoSphere
+        sfml-graphics
+        sfml-window
+        sfml-system
+        sfml-audio
+)

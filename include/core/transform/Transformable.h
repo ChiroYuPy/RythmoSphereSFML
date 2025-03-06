@@ -8,21 +8,25 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include <SFML/System/Vector2.hpp>
 
 #include "Transform.h"
 
 class Transformable {
 public:
-    Transformable(float x, float y);
+    virtual ~Transformable() = default;
 
-    void addTransform(const std::string& key, std::shared_ptr<Transform> transform);
+    Transformable();
 
-    void update(float currentTime);
+    void addTransform(const std::string& key, const std::shared_ptr<Transform> &transform);
+
+    virtual void update(float currentTime);
 
     float getValue(const std::string& key, float defaultValue);
 
 protected:
-    float x, y, rotation;
+    sf::Vector2f position;
+    float rotation;
 
 private:
     std::unordered_map<std::string, std::shared_ptr<Transform>> transforms;

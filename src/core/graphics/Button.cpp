@@ -9,7 +9,7 @@ Button::Button(const float x, const float y, const float width, const float heig
     // Initialisation du bouton
     buttonShape.setSize(sf::Vector2f(width, height));
     buttonShape.setFillColor(sf::Color::Blue);
-    buttonShape.setPosition(x, y);
+    setPosition(x, y);
 }
 
 void Button::draw(sf::RenderWindow& window) {
@@ -35,4 +35,5 @@ bool Button::isHovered(float mouseX, float mouseY) const {
 
 void Button::setPosition(float x, float y) {
     buttonShape.setPosition(x, y);
+    position = sf::Vector2f(x, y);
 }
