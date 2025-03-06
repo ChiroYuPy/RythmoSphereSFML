@@ -13,8 +13,9 @@ class Label : public Drawable {
 public:
     Label(const std::string& text, float x, float y, const sf::Font& font, unsigned int size);
 
-    void draw(sf::RenderWindow& window) const override;
+    void draw(sf::RenderWindow& window) override;
     void update(float deltaTime) override;
+    void handleEvent(const sf::Event& event, const sf::RenderWindow& window) override;
 
     void setText(const std::string& newText);
     void setPosition(float x, float y);

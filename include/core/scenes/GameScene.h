@@ -19,7 +19,7 @@ public:
 
     void initialize() override;
     void update(float deltaTime) override;
-    void handleEvent(const sf::Event& event) override;
+    void handleEvent(const sf::Event& event, const sf::RenderWindow& window) override;
 
     void onClickButton() const;
 

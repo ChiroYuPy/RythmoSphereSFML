@@ -12,8 +12,9 @@ class DrawableHitCircle : public DrawableHitObject {
 public:
     explicit DrawableHitCircle(HitCircle* circleHitObject);
 
-    void draw(sf::RenderWindow& window) const override;
+    void draw(sf::RenderWindow& window) override;
     void update(float deltaTime) override;
+    void handleEvent(const sf::Event& event, const sf::RenderWindow& window) override;
 };
 
 #endif //DRAWABLEHITCIRCLE_H

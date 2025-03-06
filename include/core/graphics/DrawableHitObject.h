@@ -14,8 +14,9 @@ class DrawableHitObject : public Drawable {
 public:
     explicit DrawableHitObject(HitObject* hitObject);
 
-    void draw(sf::RenderWindow& window) const override = 0;
+    void draw(sf::RenderWindow& window) override;
     void update(float deltaTime) override;
+    void handleEvent(const sf::Event& event, const sf::RenderWindow& window) override;
 
     bool isHit() const;
     void onHit();

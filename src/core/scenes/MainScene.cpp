@@ -22,7 +22,7 @@ void MainScene::update(float deltaTime) {
 
 }
 
-void MainScene::handleEvent(const sf::Event& event) {
+void MainScene::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
 
 }
 

@@ -9,6 +9,7 @@ add_executable(RythmoSphere
         main.cpp
         src/core/Game.cpp
         src/core/managers/AudioManager.cpp
+        src/core/managers/ConfigManager.cpp
         src/core/managers/GraphicsManager.cpp
         src/core/managers/SceneManager.cpp
         src/core/managers/TimeManager.cpp
@@ -20,6 +21,5 @@ add_executable(RythmoSphere
         src/core/graphics/DrawableHitCircle.cpp
         src/core/graphics/Label.cpp
         src/core/graphics/Button.cpp
-
 )
 target_link_libraries(RythmoSphere sfml-graphics sfml-window sfml-system sfml-audio)

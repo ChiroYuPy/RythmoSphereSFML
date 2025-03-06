@@ -24,16 +24,11 @@ void GameScene::update(float deltaTime) {
 
 }
 
-void GameScene::handleEvent(const sf::Event& event) {
-    if (event.type == sf::Event::MouseButtonPressed) {
-        float mouseX = event.mouseButton.x;
-        float mouseY = event.mouseButton.y;
-
-        for (const auto& drawable : drawables) {
-            auto button = std::dynamic_pointer_cast<Button>(drawable);
-            if (button) {
-                button->handleClick(mouseX, mouseY);
-            }
+void GameScene::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
+    for (const auto& drawable : drawables) {
+        auto button = std::dynamic_pointer_cast<Button>(drawable);
+        if (button) {
+            button->handleEvent(event, window);
         }
     }
 }
@@ -46,7 +41,7 @@ void GameScene::onClickButton() const {
 void GameScene::onEnter() {
     auto label = std::make_shared<Label>("GameScene", 100, 100, font, 24);
 
-    auto button = std::make_shared<Button>("Button", 50, 50, font, 24, [this]() { GameScene::onClickButton(); });
+    auto button = std::make_shared<Button>(50, 50, 100, 200, font, 24, [this]() { GameScene::onClickButton(); });
 
     drawables.emplace_back(label);
     drawables.emplace_back(button);

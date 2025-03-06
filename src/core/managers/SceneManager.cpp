@@ -15,13 +15,17 @@ SceneManager::SceneManager(Game& game) : game(game) {
 }
 
 void SceneManager::changeScene(SceneType sceneType) {
-    if (sceneCache.find(sceneType) != sceneCache.end()) {
+    if (sceneCache.contains(sceneType)) {
         if (currentScene) currentScene->onExit();
         currentScene = sceneCache[sceneType];
-        currentScene->onEnter();
+        if (currentScene) currentScene->onEnter();
     } else {
         std::cerr << "Scene not found!" << std::endl;
     }
+}
+
+void SceneManager::update(const sf::Time deltaTime) const {
+    if (currentScene) currentScene->update(deltaTime.asSeconds());
 }
 
 std::shared_ptr<Scene> SceneManager::getCurrentScene() {

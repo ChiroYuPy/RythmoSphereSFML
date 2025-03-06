@@ -16,16 +16,17 @@ class Game;
 #include "../scenes/SceneType.h"
 
 class SceneManager {
+private:
+    Game& game;
+    std::shared_ptr<Scene> currentScene;
+    std::map<SceneType, std::shared_ptr<Scene>> sceneCache;
+
 public:
     explicit SceneManager(Game& game);
 
     void changeScene(SceneType sceneType);
+    void update(sf::Time deltaTime) const;
     std::shared_ptr<Scene> getCurrentScene();
-
-private:
-    Game& game;
-	std::shared_ptr<Scene> currentScene;
-    std::map<SceneType, std::shared_ptr<Scene>> sceneCache;
 };
 
 #endif //SCENEMANAGER_H

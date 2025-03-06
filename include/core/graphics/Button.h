@@ -12,22 +12,19 @@
 
 class Button : public Drawable {
 public:
-    Button(const std::string& text, float x, float y, const sf::Font& font, unsigned int size,
-           std::function<void()> onClick);
+    Button(float x, float y, float width, float height, const sf::Font& font, unsigned int size, std::function<void()> onClick);
 
-    void draw(sf::RenderWindow& window) const override;
+    void draw(sf::RenderWindow& window) override;
     void update(float deltaTime) override;
+    void handleEvent(const sf::Event& event, const sf::RenderWindow& window) override;
 
     bool isHovered(float mouseX, float mouseY) const;
-
-    void handleClick(float mouseX, float mouseY) const;
 
     void setPosition(float x, float y);
 
 private:
     sf::RectangleShape buttonShape;
-    sf::Text buttonText;
-    std::function<void()> onClick;  // Fonction callback appelée lors d'un clic
+    std::function<void()> onClick;
 };
 
 #endif //BUTTON_H

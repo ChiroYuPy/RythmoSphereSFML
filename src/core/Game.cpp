@@ -6,6 +6,7 @@
 
 Game::Game()
     : graphicsManager(std::make_unique<GraphicsManager>(*this)),
+      configManager(std::make_unique<ConfigManager>(*this)),
       audioManager(std::make_unique<AudioManager>(*this)),
       timeManager(std::make_unique<TimeManager>(*this)),
       sceneManager(std::make_unique<SceneManager>(*this)) {
@@ -25,14 +26,13 @@ void Game::run() const {
 
         sf::Event event{};
         while (graphicsManager->getWindow().pollEvent(event)) {
-            sceneManager->getCurrentScene()->handleEvent(event);
+            sceneManager->getCurrentScene()->handleEvent(event, graphicsManager->getWindow());
             if (event.type == sf::Event::Closed) {
                 graphicsManager->getWindow().close();
             }
         }
 
-        sceneManager->getCurrentScene()->update(deltaTime.asSeconds());
-
+        sceneManager->update(deltaTime);
         graphicsManager->render();
     }
 }

@@ -9,6 +9,10 @@
 DrawableHitObject::DrawableHitObject(HitObject* hitObject)
     : hitObject(hitObject), hit(false) {}
 
+void DrawableHitObject::draw(sf::RenderWindow& window) {
+
+}
+
 void DrawableHitObject::update(float deltaTime) {
     if (!hit) {
         float currentTime = 0; // getCurrentGameTime();
@@ -16,6 +20,10 @@ void DrawableHitObject::update(float deltaTime) {
             onHit();
         }
     }
+}
+
+void DrawableHitObject::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
+
 }
 
 bool DrawableHitObject::isHit() const {

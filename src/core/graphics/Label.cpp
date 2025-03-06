@@ -11,11 +11,15 @@ Label::Label(const std::string& text, float x, float y, const sf::Font& font, un
     labelText.setPosition(x, y);
 }
 
-void Label::draw(sf::RenderWindow& window) const {
+void Label::draw(sf::RenderWindow& window) {
     window.draw(labelText);
 }
 
 void Label::update(float deltaTime) {
+
+}
+
+void Label::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
 
 }
 

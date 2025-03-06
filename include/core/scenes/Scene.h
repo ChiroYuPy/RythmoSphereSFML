@@ -15,17 +15,17 @@
 class Game;
 
 class Scene {
+protected:
+    std::vector<std::shared_ptr<Drawable>> drawables;
+
 public:
     virtual ~Scene() = default;
 
-    virtual void initialize() = 0;                          // on application starting ( after game initialization )
-    virtual void update(float deltaTime) = 0;               // on application update
-    virtual void handleEvent(const sf::Event& event) = 0;   // on window event
     virtual void onEnter() = 0;                             // on entering scene
     virtual void onExit() = 0;                              // on exiting scene
-
-protected:
-    std::vector<std::shared_ptr<Drawable>> drawables;
+    virtual void initialize() = 0;                          // on application starting ( after game initialization )
+    virtual void update(float deltaTime) = 0;               // on application update
+    virtual void handleEvent(const sf::Event& event, const sf::RenderWindow& window) = 0;   // on window event
 };
 
 #endif //SCENE_H
