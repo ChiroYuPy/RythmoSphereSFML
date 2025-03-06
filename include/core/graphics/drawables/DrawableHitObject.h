@@ -15,7 +15,7 @@ public:
     explicit DrawableHitObject(HitObject* hitObject);
 
     void draw(sf::RenderWindow& window) override;
-    void update(float deltaTime) override;
+    void update(sf::Time globalTime, sf::Time deltaTime) override;
 
     bool isHit() const;
     void onHit();

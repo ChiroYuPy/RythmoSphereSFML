@@ -20,9 +20,10 @@ void GameScene::initialize() {
     songPosition = 0.0f;
 }
 
-void GameScene::update(float deltaTime) {
+void GameScene::update(const sf::Time globalTime, const sf::Time deltaTime) {
     for (const auto& drawable : drawables) {
-        drawable->update(deltaTime);
+        drawable->update(globalTime, deltaTime);
+        drawable->setX(drawable->getValue("x", 100));
     }
 }
 
@@ -45,21 +46,14 @@ void GameScene::onEnter() {
     auto boxButton = std::make_shared<BoxButton>(400-128, 300-128, 256, 256);
     boxButton->setOnClick([this] { onClickButton(); });
 
-    float startValue = 0.0f;
-    float maxValue = 100.0f;
     std::function function = [](const float t) { return t; };
-    float startTime = 0.0f;
-    float durationTime = 5.0f;
-    int loopCount = 5;
-    bool rewinded = false;
-
-    const auto transform = std::make_shared<Transform>(startValue, maxValue, function, startTime, durationTime, loopCount, rewinded);
+    const auto transform = std::make_shared<Transform>(400-320, 400+64, function, 0, 2, -1, true);
     boxButton->addTransform("x", transform);
 
     drawables.emplace_back(label);
-    drawables.emplace_back(boxButton);
-
     game.getGraphicsManager()->addDrawable(label);
+
+    drawables.emplace_back(boxButton);
     game.getGraphicsManager()->addDrawable(boxButton);
 }
 

@@ -14,7 +14,7 @@ public:
     Label(const std::string& text, float x, float y, const sf::Font& font, unsigned int size);
 
     void draw(sf::RenderWindow& window) override;
-    void update(float deltaTime) override;
+    void update(sf::Time globalTime, sf::Time deltaTime) override;
 
     void setText(const std::string& newText);
     void setPosition(float x, float y);

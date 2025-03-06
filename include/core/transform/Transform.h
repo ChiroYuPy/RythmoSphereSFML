@@ -6,12 +6,13 @@
 #define TRANSFORM_H
 
 #include <functional>
+#include <SFML/System/Time.hpp>
 
 class Transform {
 public:
     Transform(float startValue, float maxValue, std::function<float(float)> function, float startTime, float durationTime, int loopCount, bool rewinded = false);
 
-    void update(float currentTime);
+    void update(sf::Time globalTime, sf::Time deltaTime);
 
     float getValue() const;
 

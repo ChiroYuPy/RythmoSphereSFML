@@ -12,13 +12,9 @@
 
 class BoxButton final : public Box, public Button {
 public:
-    BoxButton(const float x, const float y, const float width, const float height)
-        : Box(x, y, width, height) {}
+    BoxButton(float x, float y, float width, float height);
 
-    bool contains(const float x, const float y) override {
-        return x >= position.x && x <= position.x + width &&
-               y >= position.y && y <= position.y + height;
-    }
+    bool contains(float x, float y) override;
 };
 
 #endif //BOXBUTTON_H

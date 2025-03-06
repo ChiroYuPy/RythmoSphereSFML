@@ -15,6 +15,6 @@ void DrawableHitCircle::draw(sf::RenderWindow& window) {
               << ") avec un rayon de " << circle->getRadius() << "\n";
 }
 
-void DrawableHitCircle::update(const float deltaTime) {
-    DrawableHitObject::update(deltaTime);
+void DrawableHitCircle::update(const sf::Time globalTime, const sf::Time deltaTime) {
+    DrawableHitObject::update(globalTime, deltaTime);
 }

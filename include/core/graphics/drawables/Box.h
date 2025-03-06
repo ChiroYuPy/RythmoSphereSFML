@@ -9,18 +9,11 @@
 
 class Box : public Drawable {
 public:
-    Box(const float x, const float y, const float width, const float height)
-        : position(x, y), width(width), height(height) {}
+    Box(float x, float y, float width, float height);
 
-    void draw(sf::RenderWindow& window) override {
-        sf::RectangleShape rect(sf::Vector2f(width, height));
-        rect.setPosition(position);
-        rect.setFillColor(sf::Color::Green);
-        window.draw(rect);
-    }
+    void draw(sf::RenderWindow& window) override;
 
 protected:
-    sf::Vector2f position;
     float width, height;
 };
 

@@ -6,21 +6,24 @@
 
 #include "../../../include/core/transform/Transform.h"
 
-Transform::Transform(const float startValue, const float maxValue, std::function<float(float)> function, const float startTime, const float durationTime, const int loopCount, bool rewinded)
-        : startValue(startValue), maxValue(maxValue), currentValue(startValue), function(std::move(function)), startTime(startTime), durationTime(durationTime), loopCount(loopCount), looped(0), rewinded(false), finished(false) {}
+#include <iostream>
+#include <ostream>
+#include <SFML/System/Time.hpp>
 
-void Transform::update(const float currentTime) {
+Transform::Transform(const float startValue, const float maxValue, std::function<float(float)> function, const float startTime, const float durationTime, const int loopCount, bool rewinded)
+        : startValue(startValue), maxValue(maxValue), currentValue(startValue), function(std::move(function)), startTime(startTime), durationTime(durationTime), loopCount(loopCount), looped(0), rewinded(rewinded), finished(false) {}
+
+void Transform::update(const sf::Time globalTime, sf::Time deltaTime) {
     if (finished) return;
 
-    float elapsedTime = currentTime - startTime;
+    float elapsedTime = globalTime.asSeconds() - startTime;
     if (elapsedTime < 0) return;
-
     if (elapsedTime >= durationTime) {
         looped++;
         if (loopCount != -1 && looped >= loopCount) {
             finished = true;
         } else {
-            startTime = currentTime;
+            startTime = globalTime.asSeconds();
             elapsedTime = 0;
             if (rewinded) std::swap(startValue, maxValue);
         }

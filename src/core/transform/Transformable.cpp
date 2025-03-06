@@ -12,9 +12,9 @@ void Transformable::addTransform(const std::string& key, const std::shared_ptr<T
     transforms[key] = transform;
 }
 
-void Transformable::update(const float currentTime) {
+void Transformable::update(const sf::Time globalTime, const sf::Time deltaTime) {
     for (auto& [key, transform] : transforms) {
-        transform->update(currentTime);
+        transform->update(globalTime, deltaTime);
     }
     position.x = getValue("x", position.x);
     rotation = getValue("rotation", rotation);

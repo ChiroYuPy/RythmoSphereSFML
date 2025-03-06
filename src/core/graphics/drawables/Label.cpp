@@ -15,7 +15,7 @@ void Label::draw(sf::RenderWindow& window) {
     window.draw(labelText);
 }
 
-void Label::update(float deltaTime) {
+void Label::update(sf::Time globalTime, sf::Time deltaTime) {
 
 }
 

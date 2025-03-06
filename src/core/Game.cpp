@@ -14,7 +14,8 @@ Game::Game()
 }
 
 void Game::run() const {
-    sf::Clock clock;
+    sf::Clock globalClock;
+    sf::Clock deltaClock;
 
     sceneManager->changeScene(SceneType::Main);
     sceneManager->changeScene(SceneType::Game);
@@ -22,7 +23,8 @@ void Game::run() const {
     sceneManager->changeScene(SceneType::Game);
 
     while (graphicsManager->getWindow().isOpen()) {
-        sf::Time deltaTime = clock.restart();
+        const sf::Time globalTime = globalClock.getElapsedTime();
+        const sf::Time deltaTime = deltaClock.restart();
 
         sf::Event event{};
         while (graphicsManager->getWindow().pollEvent(event)) {
@@ -32,7 +34,7 @@ void Game::run() const {
             }
         }
 
-        sceneManager->update(deltaTime);
+        sceneManager->update(globalTime, deltaTime);
         graphicsManager->render();
     }
 }

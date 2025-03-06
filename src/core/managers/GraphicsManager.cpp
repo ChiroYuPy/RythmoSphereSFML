@@ -6,6 +6,7 @@
 
 GraphicsManager::GraphicsManager(Game& game) : game(game) {
     window = std::make_unique<sf::RenderWindow>(sf::VideoMode(800, 600), "RythmoSphere");
+    window->setFramerateLimit(330);
 }
 
 void GraphicsManager::render() const {

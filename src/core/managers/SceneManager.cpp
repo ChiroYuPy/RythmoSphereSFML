@@ -24,8 +24,8 @@ void SceneManager::changeScene(SceneType sceneType) {
     }
 }
 
-void SceneManager::update(const sf::Time deltaTime) const {
-    if (currentScene) currentScene->update(deltaTime.asSeconds());
+void SceneManager::update(const sf::Time globalTime, const sf::Time deltaTime) const {
+    if (currentScene) currentScene->update(globalTime, deltaTime);
 }
 
 std::shared_ptr<Scene> SceneManager::getCurrentScene() {

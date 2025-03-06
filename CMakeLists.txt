@@ -20,6 +20,8 @@ add_executable(RythmoSphere
         src/core/graphics/drawables/DrawableHitObject.cpp
         src/core/graphics/drawables/DrawableHitCircle.cpp
         src/core/graphics/drawables/Label.cpp
+        src/core/graphics/drawables/Box.cpp
+        src/core/graphics/drawables/BoxButton.cpp
         src/core/graphics/Button.cpp
         src/core/transform/Transform.cpp
         src/core/transform/Transformable.cpp

@@ -24,7 +24,7 @@ public:
     virtual void onEnter() = 0;                             // on entering scene
     virtual void onExit() = 0;                              // on exiting scene
     virtual void initialize() = 0;                          // on application starting ( after game initialization )
-    virtual void update(float deltaTime) = 0;               // on application update
+    virtual void update(sf::Time globalTime, sf::Time deltaTime) = 0;               // on application update
     virtual void handleEvent(const sf::Event& event, const sf::RenderWindow& window) = 0;   // on window event
 };
 

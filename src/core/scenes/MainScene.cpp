@@ -18,7 +18,7 @@ void MainScene::initialize() {
 
 }
 
-void MainScene::update(float deltaTime) {
+void MainScene::update(sf::Time globalTime, sf::Time deltaTime) {
 
 }
 

@@ -13,7 +13,7 @@ void DrawableHitObject::draw(sf::RenderWindow& window) {
 
 }
 
-void DrawableHitObject::update(float deltaTime) {
+void DrawableHitObject::update(sf::Time globalTime, sf::Time deltaTime) {
     if (!hit) {
         float currentTime = 0; // getCurrentGameTime();
         if (hitObject->checkHit(currentTime)) {

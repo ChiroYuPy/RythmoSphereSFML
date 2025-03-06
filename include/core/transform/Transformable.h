@@ -20,7 +20,7 @@ public:
 
     void addTransform(const std::string& key, const std::shared_ptr<Transform> &transform);
 
-    virtual void update(float currentTime);
+    virtual void update(sf::Time globalTime, sf::Time deltaTime);
 
     float getValue(const std::string& key, float defaultValue);
 
