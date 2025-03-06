@@ -5,7 +5,7 @@
 #ifndef CONTAINER_H
 #define CONTAINER_H
 
-#include "Drawable.h"
+#include "../Drawable.h"
 #include <vector>
 #include <memory>
 
@@ -18,7 +18,6 @@ public:
 
     void draw(sf::RenderWindow& window) override;
     void update(float deltaTime) override;
-    void handleEvent(const sf::Event& event, const sf::RenderWindow& window) override;
 };
 
 #endif //CONTAINER_H

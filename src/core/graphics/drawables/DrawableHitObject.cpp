@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include "../../../include/core/graphics/DrawableHitObject.h"
+#include "../../../../include/core/graphics/drawables/DrawableHitObject.h"
 
 DrawableHitObject::DrawableHitObject(HitObject* hitObject)
     : hitObject(hitObject), hit(false) {}
@@ -20,10 +20,6 @@ void DrawableHitObject::update(float deltaTime) {
             onHit();
         }
     }
-}
-
-void DrawableHitObject::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
-
 }
 
 bool DrawableHitObject::isHit() const {

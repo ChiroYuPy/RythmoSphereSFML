@@ -10,20 +10,27 @@
 #include <string>
 #include <functional>
 
-class Button : public Drawable {
+class Button {
 public:
-    Button(float x, float y, float width, float height, const sf::Font& font, unsigned int size, std::function<void()> onClick);
+    virtual ~Button() = default;
 
-    void draw(sf::RenderWindow& window) override;
-    void update(float deltaTime) override;
-    void handleEvent(const sf::Event& event, const sf::RenderWindow& window) override;
+    virtual bool contains(float x, float y) = 0;
 
-    bool isHovered(float mouseX, float mouseY) const;
+    void setOnClick(const std::function<void()> &action) {
+        onClick = action;
+    }
 
-    void setPosition(float x, float y);
+    void handleEvent(const sf::Event& event) {
+        if (event.type == sf::Event::MouseButtonPressed) {
+            if (contains(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y))) {
+                if (onClick) {
+                    onClick();
+                }
+            }
+        }
+    }
 
 private:
-    sf::RectangleShape buttonShape;
     std::function<void()> onClick;
 };
 

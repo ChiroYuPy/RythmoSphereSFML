@@ -2,9 +2,9 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../../include/core/graphics/Label.h"
+#include "../../../../include/core/graphics/drawables/Label.h"
 
-Label::Label(const std::string& text, float x, float y, const sf::Font& font, unsigned int size) {
+Label::Label(const std::string& text, const float x, const float y, const sf::Font& font, const unsigned int size) {
     labelText.setString(text);
     labelText.setFont(font);
     labelText.setCharacterSize(size);
@@ -19,14 +19,11 @@ void Label::update(float deltaTime) {
 
 }
 
-void Label::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
-
-}
-
 void Label::setText(const std::string& newText) {
     labelText.setString(newText);
 }
 
-void Label::setPosition(float x, float y) {
+void Label::setPosition(const float x, const float y) {
     labelText.setPosition(x, y);
+    position = sf::Vector2f(x, y);
 }

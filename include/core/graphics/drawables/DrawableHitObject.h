@@ -7,8 +7,8 @@
 #ifndef DRAWABLEHITOBJECT_H
 #define DRAWABLEHITOBJECT_H
 
-#include "Drawable.h"
-#include "../objects/HitObject.h"
+#include "../Drawable.h"
+#include "../../objects/HitObject.h"
 
 class DrawableHitObject : public Drawable {
 public:
@@ -16,7 +16,6 @@ public:
 
     void draw(sf::RenderWindow& window) override;
     void update(float deltaTime) override;
-    void handleEvent(const sf::Event& event, const sf::RenderWindow& window) override;
 
     bool isHit() const;
     void onHit();

@@ -11,7 +11,7 @@
 #include <iostream>
 
 #include "Scene.h"
-#include "../graphics/DrawableHitObject.h"
+#include "../graphics/drawables/DrawableHitObject.h"
 
 class GameScene final : public Scene {
 public:

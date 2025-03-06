@@ -19,12 +19,16 @@ void GraphicsManager::render() const {
 void GraphicsManager::addDrawable(const std::shared_ptr<Drawable>& drawable) { drawables.push_back(drawable); }
 
 void GraphicsManager::removeDrawable(const std::shared_ptr<Drawable>& drawable) {
-    auto it = std::find(drawables.begin(), drawables.end(), drawable);
-    if (it != drawables.end()) {
+    if (const auto it = std::ranges::find(drawables, drawable); it != drawables.end()) {
         drawables.erase(it);
     }
+
+    // auto it = std::find(drawables.begin(), drawables.end(), drawable);
+    // if (it != drawables.end()) {
+    //     drawables.erase(it);
+    // }
 }
 
 void GraphicsManager::removeAllDrawables() { drawables.clear(); }
 
-sf::RenderWindow& GraphicsManager::getWindow() const { return *window; }
+sf::RenderWindow &GraphicsManager::getWindow() const { return *window; }

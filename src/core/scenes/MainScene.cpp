@@ -6,7 +6,7 @@
 #include "../../../include/core/Game.h"
 
 #include "../../../include/core/graphics/Button.h"
-#include "../../../include/core/graphics/Label.h"
+#include "../../../include/core/graphics/drawables/Label.h"
 
 MainScene::MainScene(Game &game) : game(game){
     if (!font.loadFromFile("/home/adrian/CLionProjects/RythmoSphere/assets/fonts/Rubik-Bold.ttf")) {

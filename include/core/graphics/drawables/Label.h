@@ -5,7 +5,7 @@
 #ifndef LABEL_H
 #define LABEL_H
 
-#include "Drawable.h"
+#include "../Drawable.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 
@@ -15,7 +15,6 @@ public:
 
     void draw(sf::RenderWindow& window) override;
     void update(float deltaTime) override;
-    void handleEvent(const sf::Event& event, const sf::RenderWindow& window) override;
 
     void setText(const std::string& newText);
     void setPosition(float x, float y);

@@ -5,8 +5,8 @@
 #include "../../../include/core/scenes/GameScene.h"
 #include "../../../include/core/Game.h"
 
-#include "../../../include/core/graphics/Button.h"
-#include "../../../include/core/graphics/Label.h"
+#include "../../../include/core/graphics/drawables/BoxButton.h"
+#include "../../../include/core/graphics/drawables/Label.h"
 
 GameScene::GameScene(Game &game) : game(game){
     songPosition = 0.f;
@@ -21,14 +21,15 @@ void GameScene::initialize() {
 }
 
 void GameScene::update(float deltaTime) {
-
+    for (const auto& drawable : drawables) {
+        drawable->update(deltaTime);
+    }
 }
 
 void GameScene::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
     for (const auto& drawable : drawables) {
-        auto button = std::dynamic_pointer_cast<Button>(drawable);
-        if (button) {
-            button->handleEvent(event, window);
+        if (const auto button = std::dynamic_pointer_cast<Button>(drawable)) {
+            button->handleEvent(event);
         }
     }
 }
@@ -41,13 +42,25 @@ void GameScene::onClickButton() const {
 void GameScene::onEnter() {
     auto label = std::make_shared<Label>("GameScene", 100, 100, font, 24);
 
-    auto button = std::make_shared<Button>(50, 50, 100, 200, font, 24, [this]() { GameScene::onClickButton(); });
+    auto boxButton = std::make_shared<BoxButton>(400-128, 300-128, 256, 256);
+    boxButton->setOnClick([this] { onClickButton(); });
+
+    float startValue = 0.0f;
+    float maxValue = 100.0f;
+    std::function function = [](const float t) { return t; };
+    float startTime = 0.0f;
+    float durationTime = 5.0f;
+    int loopCount = 5;
+    bool rewinded = false;
+
+    const auto transform = std::make_shared<Transform>(startValue, maxValue, function, startTime, durationTime, loopCount, rewinded);
+    boxButton->addTransform("x", transform);
 
     drawables.emplace_back(label);
-    drawables.emplace_back(button);
+    drawables.emplace_back(boxButton);
 
     game.getGraphicsManager()->addDrawable(label);
-    game.getGraphicsManager()->addDrawable(button);
+    game.getGraphicsManager()->addDrawable(boxButton);
 }
 
 void GameScene::onExit() {
