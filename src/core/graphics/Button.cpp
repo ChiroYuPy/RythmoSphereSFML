@@ -29,13 +29,13 @@ void Button::update(float deltaTime) {
     // Aucun besoin de mise à jour pour le bouton, mais tu pourrais ajouter des animations ici
 }
 
-bool Button::isClicked(float mouseX, float mouseY) const {
+bool Button::isHovered(float mouseX, float mouseY) const {
     // Vérifie si le clic est dans les limites du bouton
     return buttonShape.getGlobalBounds().contains(mouseX, mouseY);
 }
 
-void Button::handleClick(float mouseX, float mouseY) {
-    if (isClicked(mouseX, mouseY)) {
+void Button::handleClick(float mouseX, float mouseY) const {
+    if (isHovered(mouseX, mouseY)) {
         onClick();  // Appelle la fonction callback si le bouton est cliqué
     }
 }

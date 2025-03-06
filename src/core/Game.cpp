@@ -17,12 +17,15 @@ void Game::run() const {
 
     sceneManager->changeScene(SceneType::Main);
     sceneManager->changeScene(SceneType::Game);
+    sceneManager->changeScene(SceneType::Main);
+    sceneManager->changeScene(SceneType::Game);
 
     while (graphicsManager->getWindow().isOpen()) {
         sf::Time deltaTime = clock.restart();
 
         sf::Event event{};
         while (graphicsManager->getWindow().pollEvent(event)) {
+            sceneManager->getCurrentScene()->handleEvent(event);
             if (event.type == sf::Event::Closed) {
                 graphicsManager->getWindow().close();
             }

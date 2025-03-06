@@ -12,8 +12,6 @@
 #include <iostream>
 #include <memory>
 
-#include "../graphics/Label.h"
-
 class MainScene final : public Scene {
 public:
     explicit MainScene(Game& game);

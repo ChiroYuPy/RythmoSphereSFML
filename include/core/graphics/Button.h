@@ -18,8 +18,9 @@ public:
     void draw(sf::RenderWindow& window) const override;
     void update(float deltaTime) override;
 
-    bool isClicked(float mouseX, float mouseY) const;
-    void handleClick(float mouseX, float mouseY);
+    bool isHovered(float mouseX, float mouseY) const;
+
+    void handleClick(float mouseX, float mouseY) const;
 
     void setPosition(float x, float y);
 

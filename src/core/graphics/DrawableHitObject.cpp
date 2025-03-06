@@ -18,7 +18,9 @@ void DrawableHitObject::update(float deltaTime) {
     }
 }
 
-bool DrawableHitObject::isHit() const { return hit; }
+bool DrawableHitObject::isHit() const {
+    return hit;
+}
 
 void DrawableHitObject::onHit() {
     hit = true;
