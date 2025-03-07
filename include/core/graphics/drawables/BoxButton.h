@@ -12,7 +12,7 @@
 
 class BoxButton final : public Box, public Button {
 public:
-    BoxButton(float x, float y, float width, float height);
+    BoxButton(float width, float height);
 
     bool contains(float x, float y) override;
 };

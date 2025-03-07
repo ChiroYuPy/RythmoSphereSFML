@@ -17,7 +17,7 @@ public:
     void addDrawable(std::shared_ptr<Drawable> drawable);
 
     void draw(sf::RenderWindow& window) override;
-    void update(float deltaTime) override;
+    void update(sf::Time globalTime, sf::Time deltaTime) override;
 };
 
 #endif //CONTAINER_H

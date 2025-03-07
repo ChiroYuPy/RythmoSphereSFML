@@ -23,7 +23,7 @@ void GameScene::initialize() {
 void GameScene::update(const sf::Time globalTime, const sf::Time deltaTime) {
     for (const auto& drawable : drawables) {
         drawable->update(globalTime, deltaTime);
-        drawable->setX(drawable->getValue("x", 100));
+        drawable->setRotation(drawable->getValue("rotation", 100));
     }
 }
 
@@ -43,7 +43,8 @@ void GameScene::onClickButton() const {
 void GameScene::onEnter() {
     auto label = std::make_shared<Label>("GameScene", 100, 100, font, 24);
 
-    auto boxButton = std::make_shared<BoxButton>(400-128, 300-128, 256, 256);
+    auto boxButton = std::make_shared<BoxButton>(256, 256);
+    boxButton->setPosition(sf::Vector2f(400, 300));
     boxButton->setOnClick([this] { onClickButton(); });
 
     std::function function = [](const float t) {
@@ -51,8 +52,8 @@ void GameScene::onEnter() {
         return 1 - ( - 2 * t + 2) * ( - 2 * t + 2) / 2;
     };
 
-    const auto transform = std::make_shared<Transform>(400-320, 400+64, function, 0, 2, -1, true);
-    boxButton->addTransform("x", transform);
+    const auto transform = std::make_shared<Transform>(0, 90, function, 0, 8, -1, false);
+    boxButton->addTransform("rotation", transform);
 
     drawables.emplace_back(label);
     game.getGraphicsManager()->addDrawable(label);

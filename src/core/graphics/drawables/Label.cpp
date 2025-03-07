@@ -25,5 +25,4 @@ void Label::setText(const std::string& newText) {
 
 void Label::setPosition(const float x, const float y) {
     labelText.setPosition(x, y);
-    position = sf::Vector2f(x, y);
 }

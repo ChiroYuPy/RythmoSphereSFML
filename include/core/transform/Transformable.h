@@ -24,11 +24,20 @@ public:
 
     float getValue(const std::string& key, float defaultValue);
 
-protected:
-    sf::Vector2f position;
-    float rotation;
+    sf::Vector2f getPosition() const { return position; }
+    float getX() const { return position.x; }
+    float getY() const { return position.y; }
+
+    void setPosition(const sf::Vector2f position) { this->position = position; }
+    void setX(const float newX) { position.x = newX; }
+    void setY(const float newY) { position.y = newY; }
+
+    float getRotation() const { return rotation; }
+    void setRotation(const float newRotation) { rotation = newRotation; }
 
 private:
+    sf::Vector2f position;
+    float rotation;
     std::unordered_map<std::string, std::shared_ptr<Transform>> transforms;
 };
 

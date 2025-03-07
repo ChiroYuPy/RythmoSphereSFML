@@ -9,7 +9,7 @@
 
 class Box : public Drawable {
 public:
-    Box(float x, float y, float width, float height);
+    Box(float width, float height);
 
     void draw(sf::RenderWindow& window) override;
 
