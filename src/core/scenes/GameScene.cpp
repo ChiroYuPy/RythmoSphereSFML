@@ -46,7 +46,11 @@ void GameScene::onEnter() {
     auto boxButton = std::make_shared<BoxButton>(400-128, 300-128, 256, 256);
     boxButton->setOnClick([this] { onClickButton(); });
 
-    std::function function = [](const float t) { return t; };
+    std::function function = [](const float t) {
+        if (t < 0.5) return 2 * t * t;
+        return 1 - ( - 2 * t + 2) * ( - 2 * t + 2) / 2;
+    };
+
     const auto transform = std::make_shared<Transform>(400-320, 400+64, function, 0, 2, -1, true);
     boxButton->addTransform("x", transform);
 
