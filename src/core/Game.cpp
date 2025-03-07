@@ -19,8 +19,6 @@ void Game::run() const {
 
     sceneManager->changeScene(SceneType::Main);
     sceneManager->changeScene(SceneType::Game);
-    sceneManager->changeScene(SceneType::Main);
-    sceneManager->changeScene(SceneType::Game);
 
     while (graphicsManager->getWindow().isOpen()) {
         const sf::Time globalTime = globalClock.getElapsedTime();

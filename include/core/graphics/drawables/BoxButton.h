@@ -12,7 +12,7 @@
 
 class BoxButton final : public Box, public Button {
 public:
-    BoxButton(float width, float height);
+    BoxButton(float width, float height, sf::Color color);
 
     bool contains(float x, float y) override;
 };

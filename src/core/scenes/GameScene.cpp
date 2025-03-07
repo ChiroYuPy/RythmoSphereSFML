@@ -5,6 +5,7 @@
 #include "../../../include/core/scenes/GameScene.h"
 #include "../../../include/core/Game.h"
 
+#include "../../../include/core/graphics/drawables/Circle.h"
 #include "../../../include/core/graphics/drawables/BoxButton.h"
 #include "../../../include/core/graphics/drawables/Label.h"
 
@@ -23,7 +24,6 @@ void GameScene::initialize() {
 void GameScene::update(const sf::Time globalTime, const sf::Time deltaTime) {
     for (const auto& drawable : drawables) {
         drawable->update(globalTime, deltaTime);
-        drawable->setRotation(drawable->getValue("rotation", 100));
     }
 }
 
@@ -42,24 +42,31 @@ void GameScene::onClickButton() const {
 
 void GameScene::onEnter() {
     auto label = std::make_shared<Label>("GameScene", 100, 100, font, 24);
-
-    auto boxButton = std::make_shared<BoxButton>(256, 256);
-    boxButton->setPosition(sf::Vector2f(400, 300));
-    boxButton->setOnClick([this] { onClickButton(); });
-
-    std::function function = [](const float t) {
-        if (t < 0.5) return 2 * t * t;
-        return 1 - ( - 2 * t + 2) * ( - 2 * t + 2) / 2;
-    };
-
-    const auto transform = std::make_shared<Transform>(0, 90, function, 0, 8, -1, false);
-    boxButton->addTransform("rotation", transform);
-
     drawables.emplace_back(label);
     game.getGraphicsManager()->addDrawable(label);
 
+    auto boxButton = std::make_shared<BoxButton>(256, 256, sf::Color::Green);
+    boxButton->setPosition(sf::Vector2f(400, 300));
+    boxButton->setOnClick([this] { onClickButton(); });
+
+    boxButton->TransformTo<float>(
+    [boxButton](const float pos) { boxButton->setX(pos); },
+    boxButton->getX()-128, boxButton->getX()+128, 200.f, 1000.f, -1, true, EaseInOut<float>
+    );
+
+    boxButton->TransformTo<float>(
+    [boxButton](const float angle) { boxButton->setRotation(angle); },
+    boxButton->getRotation(), boxButton->getRotation()+90, 200.f, 1000.f, -1, false, EaseInOut<float>
+    );
+
     drawables.emplace_back(boxButton);
     game.getGraphicsManager()->addDrawable(boxButton);
+
+    auto ball = std::make_shared<Circle>(12, sf::Color::Red);
+    ball->setPosition(sf::Vector2f(400, 300));
+
+    drawables.emplace_back(ball);
+    game.getGraphicsManager()->addDrawable(ball);
 }
 
 void GameScene::onExit() {
