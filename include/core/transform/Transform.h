@@ -9,14 +9,11 @@
 #include <iostream>
 #include <SFML/System/Time.hpp>
 
-template<typename T>
-double Lerp(double t) {
-    t = std::clamp(t, 0.0, 1.0);
-    return t;
+inline double Lerp(double t) {
+    return std::clamp(t, 0.0, 1.0);
 }
 
-template<typename T>
-double EaseInOut(double t) {
+inline double EaseInOut(double t) {
     t = std::clamp(t, 0.0, 1.0);
     if (t < 0.5) return 2 * t * t;
     return 1 - ( - 2 * t + 2) * ( - 2 * t + 2) / 2;
@@ -29,6 +26,7 @@ struct TransformBase {
 
 template<typename T>
 struct Transform final : TransformBase {
+
     std::function<void(const T&)> setValue;
 
     T startValue;
@@ -40,7 +38,7 @@ struct Transform final : TransformBase {
     double startTime{};
     double duration{};
 
-    std::function<T(double)> easing = Lerp<T>;
+    std::function<T(double)> easing = Lerp;
 
     void update(const sf::Time globalTime, sf::Time deltaTime) override {
         if (finished) return;

@@ -46,18 +46,12 @@ void GameScene::onEnter() {
     game.getGraphicsManager()->addDrawable(label);
 
     auto boxButton = std::make_shared<BoxButton>(256, 256, sf::Color::Green);
-    boxButton->setPosition(sf::Vector2f(400, 300));
+
+    boxButton->setPosition(sf::Vector2f(400-128, 300-128));
     boxButton->setOnClick([this] { onClickButton(); });
 
-    boxButton->TransformTo<float>(
-    [boxButton](const float pos) { boxButton->setX(pos); },
-    boxButton->getX()-128, boxButton->getX()+128, 200.f, 1000.f, -1, true, EaseInOut<float>
-    );
-
-    boxButton->TransformTo<float>(
-    [boxButton](const float angle) { boxButton->setRotation(angle); },
-    boxButton->getRotation(), boxButton->getRotation()+90, 200.f, 1000.f, -1, false, EaseInOut<float>
-    );
+    boxButton->moveTo({boxButton->getX()+256, boxButton->getY()+256}, 2048.f, EaseInOut);
+    boxButton->rotateTo(boxButton->getRotation()+90, 2048.f, EaseInOut);
 
     drawables.emplace_back(boxButton);
     game.getGraphicsManager()->addDrawable(boxButton);

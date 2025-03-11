@@ -32,7 +32,11 @@ public:
     void setRotation(const float newRotation) { rotation = newRotation; }
 
     template <typename T>
-    void TransformTo(std::function<void(const T&)> setter, T startValue, T endValue, double startTime, double duration, int loopCount, bool rewinded, std::function<T(double)> easing);
+    void TransformTo(std::function<void(const T&)> setter, T startValue, T endValue, double startTime, double duration, int loopCount, bool rewinded, std::function<double(double)> easing);
+
+    void moveTo(const sf::Vector2f &newPosition, double duration, std::function<double(double)> easing);
+
+    void rotateTo(float newRotation, double duration, std::function<double(double)> easing);
 
 private:
     sf::Vector2f position;
