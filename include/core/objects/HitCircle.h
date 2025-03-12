@@ -5,20 +5,20 @@
 #ifndef HITCIRCLE_H
 #define HITCIRCLE_H
 
+#include <SFML/Graphics/CircleShape.hpp>
+
 #include "HitObject.h"
+#include "../graphics/Drawable.h"
 
-class HitCircle : public HitObject {
+class HitCircle final : public HitObject {
 public:
-    HitCircle(float x, float y, float time, float radius);
+    HitCircle(float time, int x, int y, float radius);
 
-    float getX() const;
-    float getY() const;
-    float getRadius() const;
+    [[nodiscard]] float getRadius() const;
 
     bool checkHit(float currentTime) override;
 
 private:
-    float x, y;
     float radius;
 };
 

@@ -27,6 +27,8 @@ public:
     void changeScene(SceneType sceneType);
     void update(sf::Time globalTime, sf::Time deltaTime) const;
     std::shared_ptr<Scene> getCurrentScene();
+
+    void render(sf::RenderWindow& window) const;
 };
 
 #endif //SCENEMANAGER_H

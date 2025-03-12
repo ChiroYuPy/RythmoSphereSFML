@@ -8,12 +8,16 @@
 #include "DrawableHitObject.h"
 #include "../../objects/HitCircle.h"
 
-class DrawableHitCircle : public DrawableHitObject {
+class DrawableHitCircle final : public DrawableHitObject {
 public:
-    explicit DrawableHitCircle(HitCircle* circleHitObject);
+    explicit DrawableHitCircle(HitCircle& hitCircle);
 
     void draw(sf::RenderWindow& window) override;
     void update(sf::Time globalTime, sf::Time deltaTime) override;
+
+protected:
+    sf::CircleShape circleShape;
+    HitCircle& hitCircle;
 };
 
 #endif //DRAWABLEHITCIRCLE_H

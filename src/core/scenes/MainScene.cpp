@@ -18,7 +18,11 @@ void MainScene::initialize() {
 
 }
 
-void MainScene::update(sf::Time globalTime, sf::Time deltaTime) {
+void MainScene::onUpdate(sf::Time globalTime, sf::Time deltaTime) {
+
+}
+
+void MainScene::onRender(sf::RenderWindow& window) {
 
 }
 
@@ -28,11 +32,8 @@ void MainScene::handleEvent(const sf::Event& event, const sf::RenderWindow& wind
 
 void MainScene::onEnter() {
     auto const label = std::make_shared<Label>("MainScene", 400, 300, font, 24);
-    drawables.emplace_back(label);
-    game.getGraphicsManager()->addDrawable(label);
 }
 
 void MainScene::onExit() {
-    for (const auto& drawable : drawables) game.getGraphicsManager()->removeDrawable(drawable);
-    drawables.clear();
+
 }

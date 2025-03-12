@@ -2,60 +2,78 @@
 // Created by adrian on 06/03/25.
 //
 
-#include <utility>
+#include <cmath>
 
 #include "../../../include/core/transform/Transformable.h"
 
-#include <SFML/Graphics/RenderTarget.hpp>
+Transformable::Transformable() noexcept
+    : position(0.f, 0.f), rotation(0.f), scale(1.f, 1.f) {}
 
-Transformable::Transformable() : position(0, 0), rotation(0) {
-
+void Transformable::update(const sf::Time deltaTime) {
+    animator.update(deltaTime);
 }
 
-void Transformable::update(const sf::Time globalTime, const sf::Time deltaTime) {
-    for (const auto& transform : transforms) {
-        transform->update(globalTime, deltaTime);
-    }
+void Transformable::setParent(Transformable* newParent) {
+    parent = newParent;
 }
 
-template <typename T>
-void Transformable::TransformTo(std::function<void(const T&)> setter, T startValue, T endValue, double startTime, double duration, int loopCount, bool rewinded, std::function<double(double)> easing) {
-    auto transform = std::make_shared<Transform<T>>();
+sf::Transform Transformable::getGlobalTransform() const {
+    sf::Transform transform;
+    transform.translate(position);
+    transform.rotate(rotation);
+    transform.scale(scale);
 
-    transform->setValue = std::move(setter);
-    transform->easing = std::move(easing);
-
-    transform->startTime = startTime;
-    transform->duration = duration;
-
-    transform->startValue = startValue;
-    transform->endValue = endValue;
-
-    transform->loopCount = loopCount;
-    transform->rewind = rewinded;
-
-    transforms.push_back(transform);
+    if (parent) return parent->getGlobalTransform() * transform;
+    return transform;
 }
 
-void Transformable::moveTo(const sf::Vector2f& newPosition, const double duration, std::function<double(double)> easing) {
-    TransformTo<float>(
-    [this](const float x) { setX(x); },
-    getX(), newPosition.x, 0.f, duration, -1, true, easing
-    );
+sf::Vector2f Transformable::getAbsolutePosition(const sf::Vector2f& localPosition) const {
+    const double theta = getRotation() * (M_PI / 180.0f);
 
-    TransformTo<float>(
-    [this](const float y) { setY(y); },
-    getY(), newPosition.y, 0.f, duration, -1, true, easing
-    );
+    const float x_local = localPosition.x;
+    const float y_local = localPosition.y;
+
+    const auto sin_theta = static_cast<float>(sin(theta));
+    const auto cos_theta = static_cast<float>(cos(theta));
+
+    float x_global = getPosition().x + x_local * cos_theta - y_local * sin_theta;
+    float y_global = getPosition().y + x_local * sin_theta + y_local * cos_theta;
+
+    return {x_global, y_global};
 }
 
-void Transformable::rotateTo(const float newRotation, const double duration, std::function<double(double)> easing) {
-    TransformTo<float>(
-    [this](const float rotation) { setRotation(rotation); },
-    getRotation(), newRotation, 0.f, duration, -1, false, easing
-    );
+void Transformable::moveTo(const sf::Vector2f& target, float duration, const std::function<float(float)>& easingFunc) noexcept {
+    animator.addAnimation(std::make_unique<Animation<sf::Vector2f>>(&position, position, target, duration, easingFunc));
 }
 
-template void Transformable::TransformTo<double>(std::function<void(const double&)>, double, double, double, double, int, bool, std::function<double(double)>);
-template void Transformable::TransformTo<float>(std::function<void(const float&)>, float, float, double, double, int, bool, std::function<double(double)>);
-template void Transformable::TransformTo<int>(std::function<void(const int&)>, int, int, double, double, int, bool, std::function<double(double)>);
+void Transformable::rotateTo(float targetRotation, float duration, const std::function<float(float)>& easingFunc) noexcept {
+    animator.addAnimation(std::make_unique<Animation<float>>(&rotation, rotation, targetRotation, duration, easingFunc));
+}
+
+void Transformable::scaleTo(const sf::Vector2f& targetScale, float duration, const std::function<float(float)>& easingFunc) noexcept {
+    animator.addAnimation(std::make_unique<Animation<sf::Vector2f>>(&scale, scale, targetScale, duration, easingFunc));
+}
+
+const sf::Vector2f& Transformable::getPosition() const noexcept {
+    return position;
+}
+
+void Transformable::setPosition(const sf::Vector2f& newPosition) noexcept {
+    position = newPosition;
+}
+
+float Transformable::getRotation() const noexcept {
+    return rotation;
+}
+
+void Transformable::setRotation(float newRotation) noexcept {
+    rotation = newRotation;
+}
+
+const sf::Vector2f& Transformable::getScale() const noexcept {
+    return scale;
+}
+
+void Transformable::setScale(const sf::Vector2f& newScale) noexcept {
+    scale = newScale;
+}

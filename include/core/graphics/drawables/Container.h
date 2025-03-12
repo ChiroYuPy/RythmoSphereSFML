@@ -1,5 +1,5 @@
 //
-// Created by adrian on 06/03/25.
+// Created by adrian on 11/03/25.
 //
 
 #ifndef CONTAINER_H
@@ -10,14 +10,20 @@
 #include <memory>
 
 class Container : public Drawable {
-private:
-    std::vector<std::shared_ptr<Drawable>> elements;
+protected:
+    std::vector<std::shared_ptr<Drawable>> children;
 
 public:
-    void addDrawable(std::shared_ptr<Drawable> drawable);
+    using Drawable::Drawable;
+
+    void addChild(const std::shared_ptr<Drawable>& child) {
+        child->setParent(this);
+        children.push_back(child);
+    }
 
     void draw(sf::RenderWindow& window) override;
-    void update(sf::Time globalTime, sf::Time deltaTime) override;
+
+    void update(sf::Time deltaTime) override;
 };
 
 #endif //CONTAINER_H

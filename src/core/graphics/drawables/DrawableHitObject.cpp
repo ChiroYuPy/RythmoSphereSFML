@@ -6,19 +6,15 @@
 
 #include "../../../../include/core/graphics/drawables/DrawableHitObject.h"
 
-DrawableHitObject::DrawableHitObject(HitObject* hitObject)
-    : hitObject(hitObject), hit(false) {}
+DrawableHitObject::DrawableHitObject()
+    : hit(false) {}
 
 void DrawableHitObject::draw(sf::RenderWindow& window) {
 
 }
 
 void DrawableHitObject::update(sf::Time globalTime, sf::Time deltaTime) {
-    if (!hit) {
-        if (constexpr float currentTime = 0; hitObject->checkHit(currentTime)) {
-            onHit();
-        }
-    }
+
 }
 
 bool DrawableHitObject::isHit() const {

@@ -5,45 +5,48 @@
 #ifndef TRANSFORMABLE_H
 #define TRANSFORMABLE_H
 
-#include <string>
-#include <unordered_map>
-#include <memory>
+#include <SFML/Graphics/Transform.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/System/Time.hpp>
+#include <functional>
 
-#include "Transform.h"
+#include "Animator.h"
+#include "Animation.h"
 
 class Transformable {
-public:
-    virtual ~Transformable() = default;
+protected:
+    Animator animator;
+    Transformable* parent = nullptr;
 
-    Transformable();
-
-    virtual void update(sf::Time globalTime, sf::Time deltaTime);
-
-    sf::Vector2f getPosition() const { return position; }
-    float getX() const { return position.x; }
-    float getY() const { return position.y; }
-
-    void setPosition(const sf::Vector2f position) { this->position = position; }
-    void setX(const float newX) { position.x = newX; }
-    void setY(const float newY) { position.y = newY; }
-
-    float getRotation() const { return rotation; }
-    void setRotation(const float newRotation) { rotation = newRotation; }
-
-    template <typename T>
-    void TransformTo(std::function<void(const T&)> setter, T startValue, T endValue, double startTime, double duration, int loopCount, bool rewinded, std::function<double(double)> easing);
-
-    void moveTo(const sf::Vector2f &newPosition, double duration, std::function<double(double)> easing);
-
-    void rotateTo(float newRotation, double duration, std::function<double(double)> easing);
-
-private:
     sf::Vector2f position;
     float rotation;
-    std::vector<std::shared_ptr<TransformBase>> transforms;
+    sf::Vector2f scale;
+
+public:
+    Transformable() noexcept;
+
+    virtual ~Transformable() noexcept = default;
+
+    virtual void update(sf::Time deltaTime);
+
+    void setParent(Transformable* newParent);
+
+    [[nodiscard]] sf::Transform getGlobalTransform() const;
+
+    sf::Vector2f getAbsolutePosition(const sf::Vector2f &localPosition) const;
+
+    void moveTo(const sf::Vector2f& target, float duration, const std::function<float(float)>& easingFunc = Easing::EaseLinear) noexcept;
+    void rotateTo(float targetRotation, float duration, const std::function<float(float)>& easingFunc = Easing::EaseLinear) noexcept;
+    void scaleTo(const sf::Vector2f& targetScale, float duration, const std::function<float(float)>& easingFunc = Easing::EaseLinear) noexcept;
+
+    [[nodiscard]] const sf::Vector2f& getPosition() const noexcept;
+    void setPosition(const sf::Vector2f& newPosition) noexcept;
+
+    [[nodiscard]] float getRotation() const noexcept;
+    void setRotation(float newRotation) noexcept;
+
+    [[nodiscard]] const sf::Vector2f& getScale() const noexcept;
+    void setScale(const sf::Vector2f& newScale) noexcept;
 };
 
-
-
-#endif //TRANSFORMABLE_H
+#endif // TRANSFORMABLE_H

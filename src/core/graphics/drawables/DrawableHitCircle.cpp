@@ -6,14 +6,27 @@
 
 #include "../../../../include/core/graphics/drawables/DrawableHitCircle.h"
 
-DrawableHitCircle::DrawableHitCircle(HitCircle* hitCircle) : DrawableHitObject(hitCircle) {}
+DrawableHitCircle::DrawableHitCircle(HitCircle& hitCircle) : hitCircle(hitCircle) {}
 
 void DrawableHitCircle::draw(sf::RenderWindow& window) {
-    const auto* circle = dynamic_cast<HitCircle*>(hitObject);
-    std::cout << "Dessine un cercle à (" << circle->getX()
-              << ", " << circle->getY()
-              << ") avec un rayon de " << circle->getRadius() << "\n";
+    const auto* circle = &hitCircle;
+
+    circleShape.setRadius(circle->getRadius());
+    circleShape.setOrigin(circle->getRadius(), circle->getRadius());
+    if (parent) {
+        circleShape.setPosition(parent->getPosition() + getPosition());
+        circleShape.setRotation(parent->getRotation() + getRotation());
+        circleShape.setScale({parent->getScale().x * getScale().x, parent->getScale().y * getScale().y});
+    } else {
+        circleShape.setPosition(getPosition());
+        circleShape.setRotation(getRotation());
+        circleShape.setScale(getScale());
+    }
+    circleShape.setFillColor(color);
+    window.draw(circleShape);
 }
+
+
 
 void DrawableHitCircle::update(const sf::Time globalTime, const sf::Time deltaTime) {
     DrawableHitObject::update(globalTime, deltaTime);

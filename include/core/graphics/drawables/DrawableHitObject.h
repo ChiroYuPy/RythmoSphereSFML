@@ -12,16 +12,16 @@
 
 class DrawableHitObject : public Drawable {
 public:
-    explicit DrawableHitObject(HitObject* hitObject);
+    explicit DrawableHitObject();
 
     void draw(sf::RenderWindow& window) override;
-    void update(sf::Time globalTime, sf::Time deltaTime) override;
 
-    bool isHit() const;
+    virtual void update(sf::Time globalTime, sf::Time deltaTime);
+
+    [[nodiscard]] bool isHit() const;
     void onHit();
 
 protected:
-    HitObject* hitObject;
     bool hit;
 };
 #endif //DRAWABLEHITOBJECT_H

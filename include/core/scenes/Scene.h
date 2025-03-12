@@ -11,21 +11,43 @@
 #include <SFML/Graphics.hpp>
 
 #include "../graphics/Drawable.h"
+#include "../graphics/drawables/Container.h"
+
+#include <iostream>
 
 class Game;
 
 class Scene {
 protected:
-    std::vector<std::shared_ptr<Drawable>> drawables;
+    std::shared_ptr<Container> root;
 
 public:
+    Scene() {
+        root = std::make_shared<Container>();
+    }
+
     virtual ~Scene() = default;
 
-    virtual void onEnter() = 0;                             // on entering scene
-    virtual void onExit() = 0;                              // on exiting scene
-    virtual void initialize() = 0;                          // on application starting ( after game initialization )
-    virtual void update(sf::Time globalTime, sf::Time deltaTime) = 0;               // on application update
-    virtual void handleEvent(const sf::Event& event, const sf::RenderWindow& window) = 0;   // on window event
+    void addObject(const std::shared_ptr<Drawable>& obj) const {
+        root->addChild(obj);
+    }
+
+    void update(const sf::Time& currentTime, const sf::Time& deltaTime) {
+        root->update(deltaTime);
+        onUpdate(currentTime, deltaTime);
+    }
+
+    void render(sf::RenderWindow& window) {
+        root->draw(window);
+        onRender(window);
+    }
+
+    virtual void onEnter() = 0;
+    virtual void onExit() = 0;
+    virtual void initialize() = 0;
+    virtual void onUpdate(sf::Time currentTime, sf::Time deltaTime) = 0;
+    virtual void onRender(sf::RenderWindow& window) = 0;
+    virtual void handleEvent(const sf::Event& event, const sf::RenderWindow& window) = 0;
 };
 
-#endif //SCENE_H
+#endif // SCENE_H

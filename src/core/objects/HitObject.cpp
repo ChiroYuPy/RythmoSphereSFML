@@ -4,6 +4,10 @@
 
 #include "../../../include/core/objects/HitObject.h"
 
-HitObject::HitObject(float time) : hitTime(time) {}
+HitObject::HitObject(const float time, const int x, const int y) : hitTime(time), x(x), y(y) {
 
-float HitObject::getHitTime() const { return hitTime; }
+}
+
+float HitObject::getHitTime() const {
+    return hitTime;
+}

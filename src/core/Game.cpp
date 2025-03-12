@@ -5,12 +5,12 @@
 #include "../../include/core/Game.h"
 
 Game::Game()
-    : graphicsManager(std::make_unique<GraphicsManager>(*this)),
-      configManager(std::make_unique<ConfigManager>(*this)),
+    : configManager(std::make_unique<ConfigManager>(*this)),
       audioManager(std::make_unique<AudioManager>(*this)),
       timeManager(std::make_unique<TimeManager>(*this)),
       sceneManager(std::make_unique<SceneManager>(*this)) {
-
+    window = std::make_unique<sf::RenderWindow>(sf::VideoMode(800, 600), "RythmoSphere");
+    window->setFramerateLimit(330);
 }
 
 void Game::run() const {
@@ -20,24 +20,29 @@ void Game::run() const {
     sceneManager->changeScene(SceneType::Main);
     sceneManager->changeScene(SceneType::Game);
 
-    while (graphicsManager->getWindow().isOpen()) {
+    while (window->isOpen()) {
         const sf::Time globalTime = globalClock.getElapsedTime();
         const sf::Time deltaTime = deltaClock.restart();
 
         sf::Event event{};
-        while (graphicsManager->getWindow().pollEvent(event)) {
-            sceneManager->getCurrentScene()->handleEvent(event, graphicsManager->getWindow());
+        while (window->pollEvent(event)) {
+            sceneManager->getCurrentScene()->handleEvent(event, *window);
             if (event.type == sf::Event::Closed) {
-                graphicsManager->getWindow().close();
+                window->close();
             }
         }
 
         sceneManager->update(globalTime, deltaTime);
-        graphicsManager->render();
+
+        window->clear();
+        sceneManager->render(*window);
+        window->display();
     }
 }
 
-GraphicsManager* Game::getGraphicsManager() const { return graphicsManager.get(); };
-AudioManager* Game::getAudioManager() const { return audioManager.get(); };
-TimeManager* Game::getTimeManager() const { return timeManager.get(); };
-SceneManager* Game::getSceneManager() const { return sceneManager.get(); };
+sf::RenderWindow* Game::getRenderWindow() const { return window.get(); }
+
+ConfigManager* Game::getConfigManager() const { return configManager.get(); }
+AudioManager* Game::getAudioManager() const { return audioManager.get(); }
+TimeManager* Game::getTimeManager() const { return timeManager.get(); }
+SceneManager* Game::getSceneManager() const { return sceneManager.get(); }

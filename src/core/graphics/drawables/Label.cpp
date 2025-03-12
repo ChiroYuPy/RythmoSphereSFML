@@ -8,10 +8,18 @@ Label::Label(const std::string& text, const float x, const float y, const sf::Fo
     labelText.setString(text);
     labelText.setFont(font);
     labelText.setCharacterSize(size);
-    labelText.setPosition(x, y);
 }
 
 void Label::draw(sf::RenderWindow& window) {
+    if (parent) {
+        labelText.setPosition(parent->getPosition() + getPosition());
+        labelText.setRotation(parent->getRotation() + getRotation());
+        labelText.setScale({parent->getScale().x * getScale().x, parent->getScale().y * getScale().y});
+    } else {
+        labelText.setPosition(getPosition());
+        labelText.setRotation(getRotation());
+        labelText.setScale(getScale());
+    }
     window.draw(labelText);
 }
 

@@ -17,7 +17,8 @@ public:
     explicit MainScene(Game& game);
 
     void initialize() override;
-    void update(sf::Time globalTime, sf::Time deltaTime) override;
+    void onUpdate(sf::Time globalTime, sf::Time deltaTime) override;
+    void onRender(sf::RenderWindow& window) override;
     void handleEvent(const sf::Event& event, const sf::RenderWindow& window) override;
     void onEnter() override;
     void onExit() override;

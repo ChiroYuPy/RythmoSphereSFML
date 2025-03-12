@@ -8,6 +8,8 @@
 #include "../../../include/core/graphics/drawables/Circle.h"
 #include "../../../include/core/graphics/drawables/BoxButton.h"
 #include "../../../include/core/graphics/drawables/Label.h"
+#include "../../../include/core/graphics/drawables/Container.h"
+#include "../../../include/core/graphics/drawables/DrawableHitCircle.h"
 
 GameScene::GameScene(Game &game) : game(game){
     songPosition = 0.f;
@@ -21,18 +23,16 @@ void GameScene::initialize() {
     songPosition = 0.0f;
 }
 
-void GameScene::update(const sf::Time globalTime, const sf::Time deltaTime) {
-    for (const auto& drawable : drawables) {
-        drawable->update(globalTime, deltaTime);
-    }
+void GameScene::onUpdate(const sf::Time globalTime, const sf::Time deltaTime) {
+
+}
+
+void GameScene::onRender(sf::RenderWindow& window) {
+
 }
 
 void GameScene::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
-    for (const auto& drawable : drawables) {
-        if (const auto button = std::dynamic_pointer_cast<Button>(drawable)) {
-            button->handleEvent(event);
-        }
-    }
+
 }
 
 void GameScene::onClickButton() const {
@@ -41,30 +41,47 @@ void GameScene::onClickButton() const {
 }
 
 void GameScene::onEnter() {
-    auto label = std::make_shared<Label>("GameScene", 100, 100, font, 24);
-    drawables.emplace_back(label);
-    game.getGraphicsManager()->addDrawable(label);
+    const auto playField = std::make_shared<Container>();
+    playField->setPosition({
+        (static_cast<float>(game.getRenderWindow()->getSize().x) - 512) / 2,
+        (static_cast<float>(game.getRenderWindow()->getSize().y) - 384) / 2
+    });
+    playField->moveTo({256, 256}, 1024.f, Easing::EaseInOutQuad);
+    playField->rotateTo(playField->getRotation()+90, 1024.f, Easing::EaseInOutQuad);
+    playField->scaleTo({2, 2}, 1024.f, Easing::EaseInOutQuad);
 
-    auto boxButton = std::make_shared<BoxButton>(256, 256, sf::Color::Green);
+    const auto label = std::make_shared<Label>("GameScene", 0, 0, font, 32);
+    // label->moveTo({100, 200}, 1024.f, Easing::EaseInOutQuad);
+    // label->scaleTo({1, 4}, 2048.f, Easing::EaseInOutQuad);
+    // label->rotateTo(label->getRotation() + 45, 2048.f, Easing::EaseInOutQuad);
+    playField->addChild(label);
 
-    boxButton->setPosition(sf::Vector2f(400-128, 300-128));
-    boxButton->setOnClick([this] { onClickButton(); });
+    const auto boxButton = std::make_shared<BoxButton>(64, 64, sf::Color::Green);
+    // boxButton->setPosition(sf::Vector2f(0, 0));
+    // boxButton->setOnClick([this] { onClickButton(); });
+    // boxButton->moveTo({boxButton->getPosition().x + 128, boxButton->getPosition().y + 128}, 2048.f, Easing::EaseInOutQuad);
+    // boxButton->rotateTo(boxButton->getRotation() + 90, 2048.f, Easing::EaseInOutQuad);
+    // boxButton->scaleTo({2, 0.5}, 2048.f, Easing::EaseInOutQuad);
+    playField->addChild(boxButton);
 
-    boxButton->moveTo({boxButton->getX()+256, boxButton->getY()+256}, 2048.f, EaseInOut);
-    boxButton->rotateTo(boxButton->getRotation()+90, 2048.f, EaseInOut);
+    const auto ball = std::make_shared<Circle>(12, sf::Color::Red);
+    // ball->setPosition(sf::Vector2f(400, 300));
+    // ball->moveTo({400, 200}, 1024.f, Easing::EaseInOutQuad);
+    // ball->scaleTo({4, 1}, 1024.f, Easing::EaseInOutQuad);
+    playField->addChild(ball);
 
-    drawables.emplace_back(boxButton);
-    game.getGraphicsManager()->addDrawable(boxButton);
+    // HitCircle hitObject1(20, 20, 20, 50);
+    // HitCircle hitObject2(80, 50, 25, 50);
 
-    auto ball = std::make_shared<Circle>(12, sf::Color::Red);
-    ball->setPosition(sf::Vector2f(400, 300));
+    // const auto drawableHitObject1 = std::make_shared<DrawableHitCircle>(hitObject1);
+    // const auto drawableHitObject2 = std::make_shared<DrawableHitCircle>(hitObject2);
 
-    drawables.emplace_back(ball);
-    game.getGraphicsManager()->addDrawable(ball);
+    // playField->addChild(drawableHitObject1);
+    // playField->addChild(drawableHitObject2);
+
+    addObject(playField);
 }
 
 void GameScene::onExit() {
-    for (const auto& drawable : drawables) game.getGraphicsManager()->removeDrawable(drawable);
-    drawables.clear();
     hitObjects.clear();
 }

@@ -13,7 +13,6 @@
 #include "managers/ConfigManager.h"
 #include "managers/TimeManager.h"
 #include "managers/SceneManager.h"
-#include "managers/GraphicsManager.h"
 
 class Game {
 public:
@@ -22,14 +21,16 @@ public:
 
     void run() const;
 
-    GraphicsManager* getGraphicsManager() const;
-    ConfigManager* getConfigManager() const;
-    AudioManager* getAudioManager() const;
-    TimeManager* getTimeManager() const;
-    SceneManager* getSceneManager() const;
+    sf::RenderWindow *getRenderWindow() const;
+
+    [[nodiscard]] ConfigManager* getConfigManager() const;
+    [[nodiscard]] AudioManager* getAudioManager() const;
+    [[nodiscard]] TimeManager* getTimeManager() const;
+    [[nodiscard]] SceneManager* getSceneManager() const;
 
 private:
-    std::unique_ptr<GraphicsManager> graphicsManager;
+    std::unique_ptr<sf::RenderWindow> window;
+
     std::unique_ptr<ConfigManager> configManager;
     std::unique_ptr<AudioManager> audioManager;
     std::unique_ptr<TimeManager> timeManager;

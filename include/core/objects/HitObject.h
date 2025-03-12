@@ -7,14 +7,15 @@
 
 class HitObject {
 public:
-    explicit HitObject(float time);
+    explicit HitObject(float time, int x, int y);
     virtual ~HitObject() = default;
 
-    float getHitTime() const;
-    virtual bool checkHit(float currentTime) = 0; // Méthode abstraite
+    [[nodiscard]] float getHitTime() const;
+    virtual bool checkHit(float currentTime) = 0;
 
 protected:
     float hitTime;
+    int x, y;
 };
 
 #endif //HITOBJECT_H

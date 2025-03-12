@@ -28,6 +28,10 @@ void SceneManager::update(const sf::Time globalTime, const sf::Time deltaTime) c
     if (currentScene) currentScene->update(globalTime, deltaTime);
 }
 
+void SceneManager::render(sf::RenderWindow& window) const {
+    if (currentScene) currentScene->render(window);
+}
+
 std::shared_ptr<Scene> SceneManager::getCurrentScene() {
     if (currentScene == nullptr) {
         std::cerr << "Error: Scene not selected ! Terminating program." << std::endl;

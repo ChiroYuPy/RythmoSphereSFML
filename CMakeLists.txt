@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.30)
 project(RythmoSphere)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 26)
 
 find_package(SFML 2.6.1 COMPONENTS graphics window system audio REQUIRED)
 
@@ -10,7 +10,6 @@ add_executable(RythmoSphere
         src/core/Game.cpp
         src/core/managers/AudioManager.cpp
         src/core/managers/ConfigManager.cpp
-        src/core/managers/GraphicsManager.cpp
         src/core/managers/SceneManager.cpp
         src/core/managers/TimeManager.cpp
         src/core/scenes/GameScene.cpp
@@ -23,9 +22,11 @@ add_executable(RythmoSphere
         src/core/graphics/drawables/Circle.cpp
         src/core/graphics/drawables/Box.cpp
         src/core/graphics/drawables/BoxButton.cpp
+        src/core/graphics/drawables/Container.cpp
         src/core/graphics/Button.cpp
-        src/core/transform/Transform.cpp
         src/core/transform/Transformable.cpp
+        src/core/transform/Animator.cpp
+        src/core/transform/Animation.cpp
 )
 target_link_libraries(RythmoSphere
         sfml-graphics
