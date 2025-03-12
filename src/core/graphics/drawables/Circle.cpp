@@ -6,8 +6,8 @@
 
 #include <iostream>
 
-Circle::Circle(const float radius, const sf::Color color)
-    : radius(radius), color(color) {}
+Circle::Circle(const float radius)
+    : radius(radius) {}
 
 void Circle::draw(sf::RenderWindow& window) {
     circle.setRadius(radius);

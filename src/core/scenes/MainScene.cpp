@@ -31,7 +31,7 @@ void MainScene::handleEvent(const sf::Event& event, const sf::RenderWindow& wind
 }
 
 void MainScene::onEnter() {
-    auto const label = std::make_shared<Label>("MainScene", 400, 300, font, 24);
+    auto const label = std::make_shared<Label>("MainScene", font, 24);
 }
 
 void MainScene::onExit() {

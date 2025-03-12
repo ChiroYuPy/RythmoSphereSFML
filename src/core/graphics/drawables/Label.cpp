@@ -4,7 +4,7 @@
 
 #include "../../../../include/core/graphics/drawables/Label.h"
 
-Label::Label(const std::string& text, const float x, const float y, const sf::Font& font, const unsigned int size) {
+Label::Label(const std::string& text, const sf::Font& font, const unsigned int size) {
     labelText.setString(text);
     labelText.setFont(font);
     labelText.setCharacterSize(size);
@@ -22,6 +22,7 @@ void Label::draw(sf::RenderWindow& window) {
         labelText.setRotation(getRotation());
         labelText.setScale(getScale());
     }
+    labelText.setFillColor(color);
     window.draw(labelText);
 }
 

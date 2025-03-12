@@ -2,17 +2,16 @@
 // Created by adrian on 05/03/25.
 //
 
-#include <iostream>
-
 #include "../../../../include/core/graphics/drawables/DrawableHitCircle.h"
 
-DrawableHitCircle::DrawableHitCircle(HitCircle& hitCircle) : hitCircle(hitCircle) {}
+DrawableHitCircle::DrawableHitCircle(HitCircle& hitCircle) : hitCircle(hitCircle) {
+    setColor(sf::Color::Red);
+}
 
 void DrawableHitCircle::draw(sf::RenderWindow& window) {
-    const auto* circle = &hitCircle;
-
-    circleShape.setRadius(circle->getRadius());
-    circleShape.setOrigin(circle->getRadius(), circle->getRadius());
+    constexpr int radius = 32;
+    circleShape.setRadius(radius);
+    circleShape.setOrigin(radius, radius);
     if (parent) {
         circleShape.setPosition(parent->getAbsolutePosition(getPosition()));
         circleShape.setRotation(parent->getRotation() + getRotation());

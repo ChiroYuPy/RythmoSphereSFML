@@ -12,14 +12,10 @@
 
 class HitCircle final : public HitObject {
 public:
-    HitCircle(float time, int x, int y, float radius);
+    HitCircle(float time, int x, int y);
 
-    [[nodiscard]] float getRadius() const;
-
-    bool checkHit(float currentTime) override;
-
-private:
-    float radius;
+protected:
+    int x, y;
 };
 
 #endif //HITCIRCLE_H

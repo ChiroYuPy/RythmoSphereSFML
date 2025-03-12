@@ -9,13 +9,12 @@
 
 class Circle : public Drawable {
 public:
-    Circle(float radius, sf::Color color);
+    Circle(float radius);
 
     void draw(sf::RenderWindow& window) override;
 
 protected:
     float radius;
-    sf::Color color;
     sf::CircleShape circle;
 };
 

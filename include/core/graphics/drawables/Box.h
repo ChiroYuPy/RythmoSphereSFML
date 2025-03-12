@@ -9,13 +9,12 @@
 
 class Box : public Drawable {
 public:
-    Box(float width, float height, sf::Color color);
+    Box(float width, float height);
 
     void draw(sf::RenderWindow& window) override;
 
 protected:
     float width, height;
-    sf::Color color;
     sf::RectangleShape rect;
 };
 

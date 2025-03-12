@@ -4,8 +4,8 @@
 
 #include "../../../../include/core/graphics/drawables/Box.h"
 
-Box::Box(const float width, const float height, const sf::Color color)
-    : width(width), height(height), color(color) {}
+Box::Box(const float width, const float height)
+    : width(width), height(height) {}
 
 void Box::draw(sf::RenderWindow& window) {
     rect.setSize({width, height});

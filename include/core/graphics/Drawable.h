@@ -17,7 +17,7 @@ protected:
     bool visible = true;
 
 public:
-    Drawable() noexcept : color(sf::Color::Green) {}
+    Drawable() noexcept : color(sf::Color::White) {}
 
     void colorTo(const sf::Color& startColor, const sf::Color& endColor, float startTime, float duration, const std::function<float(float)>& easingFunc = Easing::EaseLinear) noexcept {
         animator.addAnimation(std::make_unique<Animation<sf::Color>>(&color, startColor, endColor, startTime, duration, easingFunc));

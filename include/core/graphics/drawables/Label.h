@@ -9,9 +9,9 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-class Label : public Drawable {
+class Label final : public Drawable {
 public:
-    Label(const std::string& text, float x, float y, const sf::Font& font, unsigned int size);
+    Label(const std::string& text, const sf::Font& font, unsigned int size);
 
     void draw(sf::RenderWindow& window) override;
     void update(sf::Time globalTime, sf::Time deltaTime);
