@@ -16,6 +16,7 @@ public:
 protected:
     float width, height;
     sf::Color color;
+    sf::RectangleShape rect;
 };
 
 #endif //BOX_H

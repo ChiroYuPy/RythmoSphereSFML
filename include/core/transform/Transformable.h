@@ -33,11 +33,14 @@ public:
 
     [[nodiscard]] sf::Transform getGlobalTransform() const;
 
-    sf::Vector2f getAbsolutePosition(const sf::Vector2f &localPosition) const;
+    [[nodiscard]] sf::Vector2f getAbsolutePosition(const sf::Vector2f &localPosition) const;
 
-    void moveTo(const sf::Vector2f& target, float duration, const std::function<float(float)>& easingFunc = Easing::EaseLinear) noexcept;
-    void rotateTo(float targetRotation, float duration, const std::function<float(float)>& easingFunc = Easing::EaseLinear) noexcept;
-    void scaleTo(const sf::Vector2f& targetScale, float duration, const std::function<float(float)>& easingFunc = Easing::EaseLinear) noexcept;
+    void moveTo(const sf::Vector2f &startPosition, const sf::Vector2f &endPosition, float startTime, float duration, const std::
+                function<float(float)> &easingFunc = Easing::EaseLinear) noexcept;
+    void rotateTo(float startRotation, float endRotation, float startTime, float duration, const std::function<float(float)> &easingFunc
+                          = Easing::EaseLinear) noexcept;
+    void scaleTo(const sf::Vector2f &startScale, const sf::Vector2f &endScale, float startTime, float duration, const std::function<
+                 float(float)> &easingFunc = Easing::EaseLinear) noexcept;
 
     [[nodiscard]] const sf::Vector2f& getPosition() const noexcept;
     void setPosition(const sf::Vector2f& newPosition) noexcept;

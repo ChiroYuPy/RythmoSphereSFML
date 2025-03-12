@@ -14,7 +14,7 @@ SceneManager::SceneManager(Game& game) : game(game) {
     sceneCache[SceneType::Game] = std::make_shared<GameScene>(game);
 }
 
-void SceneManager::changeScene(SceneType sceneType) {
+void SceneManager::changeScene(const SceneType sceneType) {
     if (sceneCache.contains(sceneType)) {
         if (currentScene) currentScene->onExit();
         currentScene = sceneCache[sceneType];

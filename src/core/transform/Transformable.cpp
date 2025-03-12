@@ -33,25 +33,30 @@ sf::Vector2f Transformable::getAbsolutePosition(const sf::Vector2f& localPositio
     const float x_local = localPosition.x;
     const float y_local = localPosition.y;
 
+    const sf::Vector2f scale = getScale();
+
+    const float x_scaled = x_local * scale.x;
+    const float y_scaled = y_local * scale.y;
+
     const auto sin_theta = static_cast<float>(sin(theta));
     const auto cos_theta = static_cast<float>(cos(theta));
 
-    float x_global = getPosition().x + x_local * cos_theta - y_local * sin_theta;
-    float y_global = getPosition().y + x_local * sin_theta + y_local * cos_theta;
+    float x_global = getPosition().x + x_scaled * cos_theta - y_scaled * sin_theta;
+    float y_global = getPosition().y + x_scaled * sin_theta + y_scaled * cos_theta;
 
     return {x_global, y_global};
 }
 
-void Transformable::moveTo(const sf::Vector2f& target, float duration, const std::function<float(float)>& easingFunc) noexcept {
-    animator.addAnimation(std::make_unique<Animation<sf::Vector2f>>(&position, position, target, duration, easingFunc));
+void Transformable::moveTo(const sf::Vector2f& startPosition, const sf::Vector2f& endPosition, float startTime, float duration, const std::function<float(float)>& easingFunc) noexcept {
+    animator.addAnimation(std::make_unique<Animation<sf::Vector2f>>(&position, startPosition, endPosition, startTime, duration, easingFunc));
 }
 
-void Transformable::rotateTo(float targetRotation, float duration, const std::function<float(float)>& easingFunc) noexcept {
-    animator.addAnimation(std::make_unique<Animation<float>>(&rotation, rotation, targetRotation, duration, easingFunc));
+void Transformable::rotateTo(float startRotation, float endRotation, float startTime, float duration, const std::function<float(float)>& easingFunc) noexcept {
+    animator.addAnimation(std::make_unique<Animation<float>>(&rotation, startRotation, endRotation, startTime, duration, easingFunc));
 }
 
-void Transformable::scaleTo(const sf::Vector2f& targetScale, float duration, const std::function<float(float)>& easingFunc) noexcept {
-    animator.addAnimation(std::make_unique<Animation<sf::Vector2f>>(&scale, scale, targetScale, duration, easingFunc));
+void Transformable::scaleTo(const sf::Vector2f& startScale, const sf::Vector2f& endScale, float startTime, float duration, const std::function<float(float)>& easingFunc) noexcept {
+    animator.addAnimation(std::make_unique<Animation<sf::Vector2f>>(&scale, startScale, endScale, startTime, duration, easingFunc));
 }
 
 const sf::Vector2f& Transformable::getPosition() const noexcept {
@@ -66,7 +71,7 @@ float Transformable::getRotation() const noexcept {
     return rotation;
 }
 
-void Transformable::setRotation(float newRotation) noexcept {
+void Transformable::setRotation(const float newRotation) noexcept {
     rotation = newRotation;
 }
 

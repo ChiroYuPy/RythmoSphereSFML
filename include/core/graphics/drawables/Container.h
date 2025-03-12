@@ -21,6 +21,10 @@ public:
         children.push_back(child);
     }
 
+    void clearChild() {
+        children.clear();
+    };
+
     void draw(sf::RenderWindow& window) override;
 
     void update(sf::Time deltaTime) override;

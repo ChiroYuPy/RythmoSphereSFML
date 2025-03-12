@@ -19,8 +19,8 @@ protected:
 public:
     Drawable() noexcept : color(sf::Color::Green) {}
 
-    void colorTo(const sf::Color& targetColor, float duration, const std::function<float(float)>& easingFunc = Easing::EaseLinear) noexcept {
-        animator.addAnimation(std::make_unique<Animation<sf::Color>>(&color, color, targetColor, duration, easingFunc));
+    void colorTo(const sf::Color& startColor, const sf::Color& endColor, float startTime, float duration, const std::function<float(float)>& easingFunc = Easing::EaseLinear) noexcept {
+        animator.addAnimation(std::make_unique<Animation<sf::Color>>(&color, startColor, endColor, startTime, duration, easingFunc));
     }
 
     virtual void draw(sf::RenderWindow& window) = 0;

@@ -46,42 +46,44 @@ void GameScene::onEnter() {
         (static_cast<float>(game.getRenderWindow()->getSize().x) - 512) / 2,
         (static_cast<float>(game.getRenderWindow()->getSize().y) - 384) / 2
     });
-    playField->moveTo({256, 256}, 1024.f, Easing::EaseInOutQuad);
-    playField->rotateTo(playField->getRotation()+90, 1024.f, Easing::EaseInOutQuad);
-    playField->scaleTo({2, 2}, 1024.f, Easing::EaseInOutQuad);
+    playField->moveTo({0, 0}, {256, 256}, 0.f, 1024.f, Easing::EaseInOutQuad);
+    playField->rotateTo(0, 40, 1024.f, 1024.f, Easing::EaseInOutQuad);
+    playField->rotateTo(40, 80, 2048.f, 1024.f, Easing::EaseInOutQuad);
+    playField->rotateTo(80, 120, 3072.f, 1024.f, Easing::EaseInOutQuad);
+    playField->scaleTo({1, 1}, {2, 2}, 0.f, 1024.f, Easing::EaseInOutQuad);
+    playField->scaleTo({2, 2}, {1, 1}, 4096.f, 1024.f, Easing::EaseInOutQuad);
 
     const auto label = std::make_shared<Label>("GameScene", 0, 0, font, 32);
-    // label->moveTo({100, 200}, 1024.f, Easing::EaseInOutQuad);
-    // label->scaleTo({1, 4}, 2048.f, Easing::EaseInOutQuad);
-    // label->rotateTo(label->getRotation() + 45, 2048.f, Easing::EaseInOutQuad);
+    // label->moveTo({100, 200}, 0.f, 1024.f, Easing::EaseInOutQuad);
+    // label->scaleTo({1, 4}, 0.f, 2048.f, Easing::EaseInOutQuad);
+    // label->rotateTo(label->getRotation() + 45, 0.f, 2048.f, Easing::EaseInOutQuad);
     playField->addChild(label);
 
     const auto boxButton = std::make_shared<BoxButton>(64, 64, sf::Color::Green);
-    // boxButton->setPosition(sf::Vector2f(0, 0));
-    // boxButton->setOnClick([this] { onClickButton(); });
-    // boxButton->moveTo({boxButton->getPosition().x + 128, boxButton->getPosition().y + 128}, 2048.f, Easing::EaseInOutQuad);
+    boxButton->setOnClick([this] { onClickButton(); });
+    boxButton->moveTo({0, 0}, {0, 128}, 1024.f, 64.f, Easing::EaseInOutQuad);
     // boxButton->rotateTo(boxButton->getRotation() + 90, 2048.f, Easing::EaseInOutQuad);
     // boxButton->scaleTo({2, 0.5}, 2048.f, Easing::EaseInOutQuad);
     playField->addChild(boxButton);
 
     const auto ball = std::make_shared<Circle>(12, sf::Color::Red);
-    // ball->setPosition(sf::Vector2f(400, 300));
-    // ball->moveTo({400, 200}, 1024.f, Easing::EaseInOutQuad);
-    // ball->scaleTo({4, 1}, 1024.f, Easing::EaseInOutQuad);
+    ball->moveTo({0, 0}, {128, -128}, 0.f, 4096.f, Easing::EaseInOutQuad);
+    ball->scaleTo({1, 1}, {3, 3}, 1024.f, 2048.f, Easing::EaseInOutQuad);
     playField->addChild(ball);
 
-    // HitCircle hitObject1(20, 20, 20, 50);
-    // HitCircle hitObject2(80, 50, 25, 50);
+    HitCircle hitObject1(0, 0, 0, 32);
+    HitCircle hitObject2(0, 0, 0, 32);
 
-    // const auto drawableHitObject1 = std::make_shared<DrawableHitCircle>(hitObject1);
-    // const auto drawableHitObject2 = std::make_shared<DrawableHitCircle>(hitObject2);
+    const auto drawableHitObject1 = std::make_shared<DrawableHitCircle>(hitObject1);
+    const auto drawableHitObject2 = std::make_shared<DrawableHitCircle>(hitObject2);
 
-    // playField->addChild(drawableHitObject1);
-    // playField->addChild(drawableHitObject2);
+    playField->addChild(drawableHitObject1);
+    playField->addChild(drawableHitObject2);
 
     addObject(playField);
 }
 
 void GameScene::onExit() {
+    clearObjects();
     hitObjects.clear();
 }

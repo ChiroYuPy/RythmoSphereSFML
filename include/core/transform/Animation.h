@@ -22,12 +22,20 @@ class Animation final : public IAnimation {
     T* attribute;
     T startValue;
     T endValue;
+    float startTime;
     float duration;
     float elapsedTime;
+    int loops;
+    bool rewind;
+
+    bool reversed = false;
+    int loopCount = 0;
+
     std::function<float(float)> easingFunction;
 
 public:
-    Animation(T* attribute, T start, T end, float duration, std::function<float(float)> easingFunc = Easing::EaseLinear);
+    Animation(T* attribute, T start, T end, float startTime, float duration, int loops, bool rewind, std::function<float(float)> easingFunc = Easing::EaseLinear);
+    Animation(T* attribute, T start, T end, float startTime, float duration, std::function<float(float)> easingFunc = Easing::EaseLinear);
     void update(sf::Time deltaTime) noexcept override;
     [[nodiscard]] bool isFinished() const noexcept override;
 };

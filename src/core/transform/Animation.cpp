@@ -5,18 +5,52 @@
 #include "../../../include/core/transform/Animation.h"
 
 template <typename T>
-Animation<T>::Animation(T* attribute, T start, T end, float duration, std::function<float(float)> easingFunc)
-    : attribute(attribute), startValue(start), endValue(end), duration(duration),
-      elapsedTime(0.f), easingFunction(std::move(easingFunc)) {}
+Animation<T>::Animation(T* attribute, T start, T end, const float startTime, const float duration, std::function<float(float)> easingFunc)
+    : attribute(attribute), startValue(start), endValue(end), startTime(startTime), duration(duration), elapsedTime(0.f), loops(0), rewind(false), easingFunction(std::move(easingFunc)) {
+}
+
+template <typename T>
+Animation<T>::Animation(T* attribute, T start, T end, const float startTime, const float duration, const int loops, const bool rewind, std::function<float(float)> easingFunc)
+    : attribute(attribute), startValue(start), endValue(end), startTime(startTime), duration(duration), elapsedTime(0.f), loops(loops), rewind(rewind), easingFunction(std::move(easingFunc)) {
+}
 
 template <typename T>
 void Animation<T>::update(const sf::Time deltaTime) noexcept {
     if (isFinished()) return;
 
     elapsedTime += static_cast<float>(deltaTime.asMilliseconds());
-    if (elapsedTime > duration) elapsedTime = duration;
 
-    float t = (duration > 0.f) ? elapsedTime / duration : 1.f;
+    if (elapsedTime < startTime) return;
+
+    float animationElapsedTime = elapsedTime - startTime;
+
+    if (animationElapsedTime >= duration) {
+        if (loops > 0) {
+            animationElapsedTime -= duration;
+            loopCount++;
+
+            if (rewind) {
+                reversed = !reversed;
+                std::swap(startValue, endValue);
+            }
+
+            if (loopCount >= loops) {
+                animationElapsedTime = duration;
+                return;
+            }
+        } else if (loops == -1) {
+            animationElapsedTime -= duration;
+            if (rewind) {
+                reversed = !reversed;
+                std::swap(startValue, endValue);
+            }
+        } else {
+            animationElapsedTime = duration;
+            return;
+        }
+    }
+
+    float t = (duration > 0.f) ? animationElapsedTime / duration : 1.f;
     t = easingFunction(t);
 
     *attribute = Lerp<T>::lerp(startValue, endValue, t);
@@ -24,7 +58,7 @@ void Animation<T>::update(const sf::Time deltaTime) noexcept {
 
 template <typename T>
 bool Animation<T>::isFinished() const noexcept {
-    return elapsedTime >= duration;
+    return elapsedTime >= (startTime + duration);
 }
 
 template class Animation<float>;

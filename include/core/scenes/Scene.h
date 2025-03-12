@@ -32,6 +32,10 @@ public:
         root->addChild(obj);
     }
 
+    void clearObjects() {
+        root->clearChild();
+    }
+
     void update(const sf::Time& currentTime, const sf::Time& deltaTime) {
         root->update(deltaTime);
         onUpdate(currentTime, deltaTime);

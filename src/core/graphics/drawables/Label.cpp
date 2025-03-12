@@ -11,8 +11,10 @@ Label::Label(const std::string& text, const float x, const float y, const sf::Fo
 }
 
 void Label::draw(sf::RenderWindow& window) {
+    const sf::FloatRect bounds = labelText.getLocalBounds();
+    labelText.setOrigin(bounds.width / 2, bounds.height / 2);
     if (parent) {
-        labelText.setPosition(parent->getPosition() + getPosition());
+        labelText.setPosition(parent->getAbsolutePosition(getPosition()));
         labelText.setRotation(parent->getRotation() + getRotation());
         labelText.setScale({parent->getScale().x * getScale().x, parent->getScale().y * getScale().y});
     } else {

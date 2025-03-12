@@ -16,6 +16,7 @@ public:
 protected:
     float radius;
     sf::Color color;
+    sf::CircleShape circle;
 };
 
 #endif //CIRCLE_H

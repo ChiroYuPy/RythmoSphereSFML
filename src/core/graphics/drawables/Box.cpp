@@ -8,7 +8,7 @@ Box::Box(const float width, const float height, const sf::Color color)
     : width(width), height(height), color(color) {}
 
 void Box::draw(sf::RenderWindow& window) {
-    sf::RectangleShape rect(sf::Vector2f(width, height));
+    rect.setSize({width, height});
     rect.setOrigin(width / 2.f, height / 2.f);
     if (parent) {
         rect.setPosition(parent->getAbsolutePosition(getPosition()));

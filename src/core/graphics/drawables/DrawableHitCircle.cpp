@@ -14,7 +14,7 @@ void DrawableHitCircle::draw(sf::RenderWindow& window) {
     circleShape.setRadius(circle->getRadius());
     circleShape.setOrigin(circle->getRadius(), circle->getRadius());
     if (parent) {
-        circleShape.setPosition(parent->getPosition() + getPosition());
+        circleShape.setPosition(parent->getAbsolutePosition(getPosition()));
         circleShape.setRotation(parent->getRotation() + getRotation());
         circleShape.setScale({parent->getScale().x * getScale().x, parent->getScale().y * getScale().y});
     } else {
