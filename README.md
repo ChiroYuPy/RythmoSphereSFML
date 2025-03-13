@@ -14,19 +14,23 @@
 
 ## Exemple
 ```cpp
+// main container, like a simple group of objects without drawing
 const auto playField = std::make_shared<Container>();
-    
+
+// simple text drawable
 const auto label = std::make_shared<Label>("GameScene", font, 32);
+label->setColor(sf::Color(127, 63, 31);)
 playField->addChild(label);
 
+// a box drawable with trigger action
 const auto boxButton = std::make_shared<BoxButton>(64, 64);
-playField->addChild(boxButton);
-    
-label->setColor(sf::Color::Blue);
-label->rotateTo(0, 360, 4096.f, 1024.f, Easing::EaseInOutQuad);
-    
 boxButton->setColor(sf::Color::Green);
 boxButton->setOnClick([this] { onClickButton(); });
+playField->addChild(boxButton);
+
+// transformations (T type) startValue, (T type) endValue, (float) startTime, (float) endTime, EasingFunction
+label->rotateTo(0, 360, 4096.f, 1024.f, Easing::EaseInOutQuad);
+    
 boxButton->moveTo({0, 0}, {0, 128}, 1024.f, 512.f, Easing::EaseInOutQuad);
 boxButton->scaleTo({1, 1}, {0.5, 1.5}, 1024.f, 512.f, Easing::EaseInOutQuad);
 
