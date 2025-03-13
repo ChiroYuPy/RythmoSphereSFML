@@ -12,6 +12,27 @@
 
 - **Parent-Based Transformations**: Objects can inherit transformations applied to their parent, simplifying the management of movement, rotation, and scaling in complex scenes.
 
+## Exemple
+```cpp
+    const auto playField = std::make_shared<Container>();
+    
+    const auto label = std::make_shared<Label>("GameScene", font, 32);
+    playField->addChild(label);
+
+    const auto boxButton = std::make_shared<BoxButton>(64, 64);
+    playField->addChild(boxButton);
+    
+    label->setColor(sf::Color::Blue);
+    label->rotateTo(0, 360, 4096.f, 1024.f, Easing::EaseInOutQuad);
+    
+    boxButton->setColor(sf::Color::Green);
+    boxButton->setOnClick([this] { onClickButton(); });
+    boxButton->moveTo({0, 0}, {0, 128}, 1024.f, 512.f, Easing::EaseInOutQuad);
+    boxButton->scaleTo({1, 1}, {0.5, 1.5}, 1024.f, 512.f, Easing::EaseInOutQuad);
+
+    playField->rotateTo(0, 40, 1024.f, 1024.f, Easing::EaseInOutQuad);
+```
+
 ## Installation
 
 ### Prerequisites
