@@ -17,30 +17,7 @@ GameScene::GameScene(Game &game) : game(game){
     if (!font.loadFromFile("/home/adrian/CLionProjects/RythmoSphere/assets/fonts/Rubik-Bold.ttf")) {
         std::cerr << "Erreur de chargement de la police!" << std::endl;
     }
-}
 
-void GameScene::initialize() {
-    songPosition = 0.0f;
-}
-
-void GameScene::onUpdate(const sf::Time globalTime, const sf::Time deltaTime) {
-
-}
-
-void GameScene::onRender(sf::RenderWindow& window) {
-
-}
-
-void GameScene::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
-
-}
-
-void GameScene::onClickButton() const {
-    std::cout << "Change Scene" << std::endl;
-    game.getSceneManager()->changeScene(SceneType::Main);
-}
-
-void GameScene::onEnter() {
     const auto playField = std::make_shared<Container>();
     playField->setPosition({
         (static_cast<float>(game.getRenderWindow()->getSize().x)) / 2,
@@ -63,12 +40,19 @@ void GameScene::onEnter() {
     label->rotateTo(0, 360, 4096.f, 1024.f, Easing::EaseInOutQuad);
     playField->addChild(label);
 
+    const auto labelTest = std::make_shared<Label>("Test", font, 64);
+    labelTest->setColor(sf::Color::White);
+    labelTest->setAnchor(Anchor::TopCenter);
+    labelTest->setOrigin(Anchor::TopCenter);
+    playField->addChild(labelTest);
+
     const auto boxButton = std::make_shared<BoxButton>(64, 64);
     boxButton->setColor(sf::Color::Green);
     boxButton->setOnClick([this] { onClickButton(); });
     boxButton->moveTo({0, 0}, {0, 128}, 1024.f, 512.f, Easing::EaseInOutQuad);
     boxButton->scaleTo({1, 1}, {0.5, 1.5}, 1024.f, 512.f, Easing::EaseInOutQuad);
     playField->addChild(boxButton);
+    interactives.push_back(boxButton);
 
     HitCircle hitObject1(0, 0, 0);
     HitCircle hitObject2(0, 0, 0);
@@ -85,8 +69,34 @@ void GameScene::onEnter() {
     addObject(playField);
 }
 
+void GameScene::initialize() {
+    songPosition = 0.0f;
+}
+
+void GameScene::onUpdate(const sf::Time globalTime, const sf::Time deltaTime) {
+
+}
+
+void GameScene::onRender(sf::RenderWindow& window) {
+
+}
+
+void GameScene::handleEvent(const sf::Event& event, const sf::RenderWindow& window) {
+    for (const auto & button : interactives) {
+        button->handleEvent(event);
+    }
+}
+
+void GameScene::onClickButton() const {
+    std::cout << "Change Scene" << std::endl;
+    game.getSceneManager()->changeScene(SceneType::Main);
+}
+
+void GameScene::onEnter() {
+
+}
+
 
 void GameScene::onExit() {
-    clearObjects();
     hitObjects.clear();
 }

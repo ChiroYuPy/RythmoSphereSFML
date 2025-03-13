@@ -14,6 +14,7 @@
 class Drawable : public Transformable {
 protected:
     sf::Color color;
+    sf::Vector2f origin;
     bool visible = true;
 
 public:
@@ -31,6 +32,7 @@ public:
     void show() { visible = true; }
     void hide() { visible = false; }
     [[nodiscard]] bool isVisible() const { return visible; }
+    void setVisible(const bool visibility) { visible = visibility; }
 };
 
 #endif //DRAWABLE_H

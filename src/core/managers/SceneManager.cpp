@@ -10,8 +10,12 @@
 #include "../../../include/core/scenes/GameScene.h"
 
 SceneManager::SceneManager(Game& game) : game(game) {
-    sceneCache[SceneType::Main] = std::make_shared<MainScene>(game);
-    sceneCache[SceneType::Game] = std::make_shared<GameScene>(game);
+    addScene(SceneType::Main, std::make_shared<MainScene>(game));
+    addScene(SceneType::Game, std::make_shared<GameScene>(game));
+}
+
+void SceneManager::addScene(const SceneType sceneType, const std::shared_ptr<Scene> &scene) {
+    sceneCache[sceneType] = scene;
 }
 
 void SceneManager::changeScene(const SceneType sceneType) {

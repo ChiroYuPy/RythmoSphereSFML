@@ -8,7 +8,7 @@
 #pragma once
 
 #include "Box.h"
-#include "../Button.h"
+#include "../interactive/Button.h"
 
 class BoxButton final : public Box, public Button {
 public:

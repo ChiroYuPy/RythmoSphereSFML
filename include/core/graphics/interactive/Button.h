@@ -5,12 +5,13 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "Drawable.h"
+#include "InteractiveUI.h"
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <functional>
+#include <iostream>
 
-class Button {
+class Button : public InteractiveUI {
 public:
     virtual ~Button() = default;
 
@@ -20,7 +21,7 @@ public:
         onClick = action;
     }
 
-    void handleEvent(const sf::Event& event) {
+    void handleEvent(const sf::Event& event) override {
         if (event.type == sf::Event::MouseButtonPressed) {
             if (contains(static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y))) {
                 if (onClick) {

@@ -65,3 +65,4 @@ template class Animation<float>;
 template class Animation<int>;
 template class Animation<sf::Vector2f>;
 template class Animation<sf::Vector2i>;
+template class Animation<sf::Color>;

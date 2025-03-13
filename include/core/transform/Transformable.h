@@ -13,14 +13,51 @@
 #include "Animator.h"
 #include "Animation.h"
 
+enum class RotationMode {
+    Clockwise,
+    CounterClockwise
+};
+
+enum class DirectionMode {
+    Horizontal,
+    Vertical
+};
+
+enum class Anchor {
+    y0 = 1,
+    y1 = 1 << 1,
+    y2 = 1 << 2,
+
+    x0 = 1 << 3,
+    x1 = 1 << 4,
+    x2 = 1 << 5,
+
+    TopLeft = y0 | x0,
+    TopCenter = y0 | x1,
+    TopRight = y0 | x2,
+
+    CenterLeft = y1 | x0,
+    Center = y1 | x1,
+    CenterRight = y1 | x2,
+
+    BottomLeft = y2 | x0,
+    BottomCenter = y2 | x1,
+    BottomRight = y2 | x2,
+
+    Custom = 1 << 6
+};
+
 class Transformable {
 protected:
     Animator animator;
-    Transformable* parent = nullptr;
+    Transformable* parent;
+    Anchor anchor;
+    sf::Vector2f anchorOffset;
 
     sf::Vector2f position;
     float rotation;
     sf::Vector2f scale;
+    Anchor origin;
 
 public:
     Transformable() noexcept;
@@ -31,9 +68,9 @@ public:
 
     void setParent(Transformable* newParent);
 
-    [[nodiscard]] sf::Transform getGlobalTransform() const;
-
     [[nodiscard]] sf::Vector2f getAbsolutePosition(const sf::Vector2f &localPosition) const;
+
+    [[nodiscard]] sf::Vector2f computeAnchor() const;
 
     void moveTo(const sf::Vector2f &startPosition, const sf::Vector2f &endPosition, float startTime, float duration, const std::
                 function<float(float)> &easingFunc = Easing::EaseLinear) noexcept;
@@ -50,6 +87,15 @@ public:
 
     [[nodiscard]] const sf::Vector2f& getScale() const noexcept;
     void setScale(const sf::Vector2f& newScale) noexcept;
+
+    [[nodiscard]] Anchor getAnchor() const noexcept;
+    void setAnchor(Anchor newAnchor) noexcept;
+
+    [[nodiscard]] sf::Vector2f getAnchorOffset() const noexcept;
+    void setAnchorOffset(sf::Vector2f newAnchorOffset) noexcept;
+
+    [[nodiscard]] Anchor getOrigin() const noexcept;
+    void setOrigin(Anchor newOrigin) noexcept;
 };
 
 #endif // TRANSFORMABLE_H

@@ -12,10 +12,11 @@
 class Container : public Drawable {
 protected:
     std::vector<std::shared_ptr<Drawable>> children;
+    sf::Vector2f size;
+    float alpha = 1.0f;
+    bool enabled = true;
 
 public:
-    using Drawable::Drawable;
-
     void addChild(const std::shared_ptr<Drawable>& child) {
         child->setParent(this);
         children.push_back(child);
@@ -28,6 +29,15 @@ public:
     void draw(sf::RenderWindow& window) override;
 
     void update(sf::Time deltaTime) override;
+
+    [[nodiscard]] sf::Vector2f getSize() const { return size; }
+    void setSize(const sf::Vector2f& newSize) { size = newSize; }
+
+    [[nodiscard]] float getAlpha() const { return alpha; }
+    void setAlpha(const float newAlpha) { alpha = newAlpha; }
+
+    [[nodiscard]] bool isEnabled() const { return enabled; }
+    void setEnabled(const bool isEnabled) { enabled = isEnabled; }
 };
 
 #endif //CONTAINER_H

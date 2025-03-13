@@ -23,7 +23,7 @@ add_executable(RythmoSphere
         src/core/graphics/drawables/Box.cpp
         src/core/graphics/drawables/BoxButton.cpp
         src/core/graphics/drawables/Container.cpp
-        src/core/graphics/Button.cpp
+        src/core/graphics/interactive/Button.cpp
         src/core/transform/Transformable.cpp
         src/core/transform/Animator.cpp
         src/core/transform/Animation.cpp

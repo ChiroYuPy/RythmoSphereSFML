@@ -24,6 +24,8 @@ private:
 public:
     explicit SceneManager(Game& game);
 
+    void addScene(SceneType sceneType, const std::shared_ptr<Scene> &scene);
+
     void changeScene(SceneType sceneType);
     void update(sf::Time globalTime, sf::Time deltaTime) const;
     std::shared_ptr<Scene> getCurrentScene();

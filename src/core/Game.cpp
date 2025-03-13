@@ -4,13 +4,15 @@
 
 #include "../../include/core/Game.h"
 
-Game::Game()
-    : configManager(std::make_unique<ConfigManager>(*this)),
-      audioManager(std::make_unique<AudioManager>(*this)),
-      timeManager(std::make_unique<TimeManager>(*this)),
-      sceneManager(std::make_unique<SceneManager>(*this)) {
+
+Game::Game() {
     window = std::make_unique<sf::RenderWindow>(sf::VideoMode(800, 600), "RythmoSphere");
     window->setFramerateLimit(330);
+
+    configManager = std::make_unique<ConfigManager>(*this);
+    audioManager = std::make_unique<AudioManager>(*this);
+    timeManager = std::make_unique<TimeManager>(*this);
+    sceneManager = std::make_unique<SceneManager>(*this);
 }
 
 void Game::run() const {
@@ -19,6 +21,7 @@ void Game::run() const {
 
     sceneManager->changeScene(SceneType::Main);
     sceneManager->changeScene(SceneType::Game);
+
 
     while (window->isOpen()) {
         const sf::Time globalTime = globalClock.getElapsedTime();

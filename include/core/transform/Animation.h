@@ -44,6 +44,7 @@ extern template class Animation<float>;
 extern template class Animation<int>;
 extern template class Animation<sf::Vector2i>;
 extern template class Animation<sf::Vector2f>;
+extern template class Animation<sf::Color>;
 
 
 #endif // ANIMATION_H

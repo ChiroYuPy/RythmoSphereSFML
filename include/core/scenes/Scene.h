@@ -12,6 +12,7 @@
 
 #include "../graphics/Drawable.h"
 #include "../graphics/drawables/Container.h"
+#include "../graphics/interactive/InteractiveUI.h"
 
 #include <iostream>
 
@@ -19,6 +20,7 @@ class Game;
 
 class Scene {
 protected:
+    std::vector<std::shared_ptr<InteractiveUI>> interactives;
     std::shared_ptr<Container> root;
 
 public:
@@ -32,7 +34,7 @@ public:
         root->addChild(obj);
     }
 
-    void clearObjects() {
+    void clearObjects() const {
         root->clearChild();
     }
 

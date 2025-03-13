@@ -7,7 +7,7 @@
 #include "../../../include/core/transform/Transformable.h"
 
 Transformable::Transformable() noexcept
-    : position(0.f, 0.f), rotation(0.f), scale(1.f, 1.f) {}
+    : rotation(0.f), scale(1.f, 1.f), anchor(Anchor::Center) {}
 
 void Transformable::update(const sf::Time deltaTime) {
     animator.update(deltaTime);
@@ -15,16 +15,6 @@ void Transformable::update(const sf::Time deltaTime) {
 
 void Transformable::setParent(Transformable* newParent) {
     parent = newParent;
-}
-
-sf::Transform Transformable::getGlobalTransform() const {
-    sf::Transform transform;
-    transform.translate(position);
-    transform.rotate(rotation);
-    transform.scale(scale);
-
-    if (parent) return parent->getGlobalTransform() * transform;
-    return transform;
 }
 
 sf::Vector2f Transformable::getAbsolutePosition(const sf::Vector2f& localPosition) const {
@@ -47,6 +37,23 @@ sf::Vector2f Transformable::getAbsolutePosition(const sf::Vector2f& localPositio
     return {x_global, y_global};
 }
 
+sf::Vector2f Transformable::computeAnchor() const {
+    float x = 0, y = 0;
+    switch (origin) {
+        case Anchor::TopLeft:      x = 0;   y = 0;   break;
+        case Anchor::TopCenter:    x = 0.5; y = 0;   break;
+        case Anchor::TopRight:     x = 1;   y = 0;   break;
+        case Anchor::CenterLeft:   x = 0;   y = 0.5; break;
+        case Anchor::Center:       x = 0.5; y = 0.5; break;
+        case Anchor::CenterRight:  x = 1;   y = 0.5; break;
+        case Anchor::BottomLeft:   x = 0;   y = 1;   break;
+        case Anchor::BottomCenter: x = 0.5; y = 1;   break;
+        case Anchor::BottomRight:  x = 1;   y = 1;   break;
+        default:                   x = 0.5; y = 0.5; break;
+    }
+    return {x, y};
+}
+
 void Transformable::moveTo(const sf::Vector2f& startPosition, const sf::Vector2f& endPosition, float startTime, float duration, const std::function<float(float)>& easingFunc) noexcept {
     animator.addAnimation(std::make_unique<Animation<sf::Vector2f>>(&position, startPosition, endPosition, startTime, duration, easingFunc));
 }
@@ -59,26 +66,20 @@ void Transformable::scaleTo(const sf::Vector2f& startScale, const sf::Vector2f& 
     animator.addAnimation(std::make_unique<Animation<sf::Vector2f>>(&scale, startScale, endScale, startTime, duration, easingFunc));
 }
 
-const sf::Vector2f& Transformable::getPosition() const noexcept {
-    return position;
-}
+const sf::Vector2f& Transformable::getPosition() const noexcept { return position; }
+void Transformable::setPosition(const sf::Vector2f& newPosition) noexcept { position = newPosition; }
 
-void Transformable::setPosition(const sf::Vector2f& newPosition) noexcept {
-    position = newPosition;
-}
+float Transformable::getRotation() const noexcept { return rotation; }
+void Transformable::setRotation(const float newRotation) noexcept { rotation = newRotation; }
 
-float Transformable::getRotation() const noexcept {
-    return rotation;
-}
+const sf::Vector2f& Transformable::getScale() const noexcept { return scale; }
+void Transformable::setScale(const sf::Vector2f& newScale) noexcept { scale = newScale; }
 
-void Transformable::setRotation(const float newRotation) noexcept {
-    rotation = newRotation;
-}
+Anchor Transformable::getAnchor() const noexcept { return anchor; }
+void Transformable::setAnchor(const Anchor newAnchor) noexcept { anchor = newAnchor; }
 
-const sf::Vector2f& Transformable::getScale() const noexcept {
-    return scale;
-}
+sf::Vector2f Transformable::getAnchorOffset() const noexcept { return anchorOffset; }
+void Transformable::setAnchorOffset(const sf::Vector2f newAnchorOffset) noexcept { anchorOffset = newAnchorOffset; }
 
-void Transformable::setScale(const sf::Vector2f& newScale) noexcept {
-    scale = newScale;
-}
+Anchor Transformable::getOrigin() const noexcept { return origin; }
+void Transformable::setOrigin(const Anchor newOrigin) noexcept { origin = newOrigin; }
