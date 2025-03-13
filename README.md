@@ -16,8 +16,8 @@
 
 ### Prerequisites
 
-- **C++11** or a more recent version  
-- **SFML 2.5+** (Graphics and multimedia library for C++)
+- **C++20** or a more recent version  
+- **SFML 2.6+** (Graphics and multimedia library for C++)
 
 ### Cloning the Project
 
