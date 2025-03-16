@@ -2,8 +2,8 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../../include/core/scenes/MainScene.h"
-#include "../../../include/core/Game.h"
+#include "../../../include/rythmosphere/scenes/MainScene.h"
+#include "../../../include/rythmosphere/Game.h"
 
 #include "../../../include/core/graphics/drawables/Label.h"
 
@@ -15,25 +15,25 @@ MainScene::MainScene(Game &game) : game(game){
         std::cerr << "Erreur de chargement de la police!" << std::endl;
     }
 
-    const auto boxButton = std::make_shared<BoxButton>(64, 64);
+    const auto boxButton = std::make_shared<BoxButton>(96, 96);
     boxButton->setPosition({
         static_cast<float>(game.getRenderWindow()->getSize().x) / 2,
         static_cast<float>(game.getRenderWindow()->getSize().y) / 2
     });
-    boxButton->setColor(sf::Color::Green);
+    boxButton->setColor(sf::Color::Red);
     boxButton->setOnClick([this] { onClickButton(); });
-    boxButton->scaleTo({1, 1}, {1.5, 3}, 1024.f, 512.f, Easing::EaseInOutQuad);
+    boxButton->scaleTo({1, 1}, {2, 2}, 1024.f, 512.f, Easing::EaseInQuad);
     boxButton->rotateTo(0, 360, 1024.f, 512.f, Easing::EaseInOutQuad);
-    boxButton->colorTo(sf::Color(0, 0, 0, 0), sf::Color(255, 255, 255, 127), 1024.f, 512.f, Easing::EaseInOutQuad);
+    boxButton->colorTo(sf::Color(255, 0, 0, 255), sf::Color(255, 0, 0, 255), 1024.f, 512.f, Easing::EaseInOutQuad);
     interactives.push_back(boxButton);
 
-    const auto circle = std::make_shared<Circle>(32);
+    const auto circle = std::make_shared<Circle>(40);
     circle->setPosition({
         static_cast<float>(game.getRenderWindow()->getSize().x) / 2,
         static_cast<float>(game.getRenderWindow()->getSize().y) / 2
     });
     circle->setColor(sf::Color::Red);
-    circle->scaleTo({1, 1}, {2, 2}, 1024.f, 512.f, Easing::EaseInOutQuad);
+    circle->scaleTo({1, 1}, {4, 4}, 1024.f, 512.f, Easing::EaseInOutQuad);
 
     addObject(circle);
     addObject(boxButton);

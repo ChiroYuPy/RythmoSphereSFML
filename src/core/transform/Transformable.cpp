@@ -7,7 +7,7 @@
 #include "../../../include/core/transform/Transformable.h"
 
 Transformable::Transformable() noexcept
-    : rotation(0.f), scale(1.f, 1.f), anchor(Anchor::Center) {}
+    : anchor(Anchor::Center), rotation(0.f), scale(1.f, 1.f), origin(Anchor::Center) {}
 
 void Transformable::update(const sf::Time deltaTime) {
     animator.update(deltaTime);
@@ -37,9 +37,9 @@ sf::Vector2f Transformable::getAbsolutePosition(const sf::Vector2f& localPositio
     return {x_global, y_global};
 }
 
-sf::Vector2f Transformable::computeAnchor() const {
+sf::Vector2f Transformable::computeAnchor(const Anchor anchor) {
     float x = 0, y = 0;
-    switch (origin) {
+    switch (anchor) {
         case Anchor::TopLeft:      x = 0;   y = 0;   break;
         case Anchor::TopCenter:    x = 0.5; y = 0;   break;
         case Anchor::TopRight:     x = 1;   y = 0;   break;
@@ -71,6 +71,9 @@ void Transformable::setPosition(const sf::Vector2f& newPosition) noexcept { posi
 
 float Transformable::getRotation() const noexcept { return rotation; }
 void Transformable::setRotation(const float newRotation) noexcept { rotation = newRotation; }
+
+const sf::Vector2f& Transformable::getSize() const noexcept { return size; }
+void Transformable::setSize(const sf::Vector2f& newSize) noexcept { size = newSize; }
 
 const sf::Vector2f& Transformable::getScale() const noexcept { return scale; }
 void Transformable::setScale(const sf::Vector2f& newScale) noexcept { scale = newScale; }

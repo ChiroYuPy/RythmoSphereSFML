@@ -11,10 +11,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "../graphics/Drawable.h"
-#include "../graphics/drawables/Container.h"
+#include "../graphics/drawables/containers/Container.h"
 #include "../graphics/interactive/InteractiveUI.h"
-
-#include <iostream>
 
 class Game;
 

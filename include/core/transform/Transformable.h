@@ -50,14 +50,16 @@ enum class Anchor {
 class Transformable {
 protected:
     Animator animator;
-    Transformable* parent;
-    Anchor anchor;
-    sf::Vector2f anchorOffset;
 
     sf::Vector2f position;
-    float rotation;
+    sf::Vector2f size;
     sf::Vector2f scale;
+    float rotation;
     Anchor origin;
+
+    Transformable* parent = nullptr;
+    Anchor anchor;
+    sf::Vector2f anchorOffset;
 
 public:
     Transformable() noexcept;
@@ -70,7 +72,7 @@ public:
 
     [[nodiscard]] sf::Vector2f getAbsolutePosition(const sf::Vector2f &localPosition) const;
 
-    [[nodiscard]] sf::Vector2f computeAnchor() const;
+    [[nodiscard]] static sf::Vector2f computeAnchor(Anchor anchor) ;
 
     void moveTo(const sf::Vector2f &startPosition, const sf::Vector2f &endPosition, float startTime, float duration, const std::
                 function<float(float)> &easingFunc = Easing::EaseLinear) noexcept;
@@ -84,6 +86,9 @@ public:
 
     [[nodiscard]] float getRotation() const noexcept;
     void setRotation(float newRotation) noexcept;
+
+    [[nodiscard]] const sf::Vector2f &getSize() const noexcept;
+    void setSize(const sf::Vector2f &newSize) noexcept;
 
     [[nodiscard]] const sf::Vector2f& getScale() const noexcept;
     void setScale(const sf::Vector2f& newScale) noexcept;

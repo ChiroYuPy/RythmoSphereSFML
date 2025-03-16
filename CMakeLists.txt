@@ -7,13 +7,13 @@ find_package(SFML 2.6.1 COMPONENTS graphics window system audio REQUIRED)
 
 add_executable(RythmoSphere
         main.cpp
-        src/core/Game.cpp
+        src/rythmosphere/Game.cpp
         src/core/managers/AudioManager.cpp
         src/core/managers/ConfigManager.cpp
         src/core/managers/SceneManager.cpp
         src/core/managers/TimeManager.cpp
-        src/core/scenes/GameScene.cpp
-        src/core/scenes/MainScene.cpp
+        src/rythmosphere/scenes/GameScene.cpp
+        src/rythmosphere/scenes/MainScene.cpp
         src/core/objects/HitObject.cpp
         src/core/objects/HitCircle.cpp
         src/core/graphics/drawables/DrawableHitObject.cpp
@@ -22,7 +22,7 @@ add_executable(RythmoSphere
         src/core/graphics/drawables/Circle.cpp
         src/core/graphics/drawables/Box.cpp
         src/core/graphics/drawables/BoxButton.cpp
-        src/core/graphics/drawables/Container.cpp
+        src/core/graphics/drawables/containers/Container.cpp
         src/core/graphics/interactive/Button.cpp
         src/core/transform/Transformable.cpp
         src/core/transform/Animator.cpp

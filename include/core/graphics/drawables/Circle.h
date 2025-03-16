@@ -9,7 +9,7 @@
 
 class Circle : public Drawable {
 public:
-    Circle(float radius);
+    explicit Circle(float radius);
 
     void draw(sf::RenderWindow& window) override;
 

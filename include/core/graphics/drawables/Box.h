@@ -14,7 +14,6 @@ public:
     void draw(sf::RenderWindow& window) override;
 
 protected:
-    float width, height;
     sf::RectangleShape rect;
 };
 

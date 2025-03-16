@@ -12,7 +12,8 @@ Label::Label(const std::string& text, const sf::Font& font, const unsigned int s
 
 void Label::draw(sf::RenderWindow& window) {
     const sf::FloatRect bounds = labelText.getLocalBounds();
-    labelText.setOrigin(bounds.width / 2, bounds.height / 2);
+    const sf::Vector2f originPosition = computeAnchor(origin);
+    labelText.setOrigin({originPosition.x * bounds.width, originPosition.y * bounds.height});
     if (parent) {
         labelText.setPosition(parent->getAbsolutePosition(getPosition()));
         labelText.setRotation(parent->getRotation() + getRotation());

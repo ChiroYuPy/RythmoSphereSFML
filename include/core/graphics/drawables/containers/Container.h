@@ -5,7 +5,7 @@
 #ifndef CONTAINER_H
 #define CONTAINER_H
 
-#include "../Drawable.h"
+#include "../../Drawable.h"
 #include <vector>
 #include <memory>
 
@@ -29,9 +29,6 @@ public:
     void draw(sf::RenderWindow& window) override;
 
     void update(sf::Time deltaTime) override;
-
-    [[nodiscard]] sf::Vector2f getSize() const { return size; }
-    void setSize(const sf::Vector2f& newSize) { size = newSize; }
 
     [[nodiscard]] float getAlpha() const { return alpha; }
     void setAlpha(const float newAlpha) { alpha = newAlpha; }

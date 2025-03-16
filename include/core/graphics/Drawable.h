@@ -14,7 +14,6 @@
 class Drawable : public Transformable {
 protected:
     sf::Color color;
-    sf::Vector2f origin;
     bool visible = true;
 
 public:

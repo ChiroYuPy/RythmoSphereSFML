@@ -2,13 +2,13 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../../include/core/scenes/GameScene.h"
-#include "../../../include/core/Game.h"
+#include "../../../include/rythmosphere/scenes/GameScene.h"
+#include "../../../include/rythmosphere/Game.h"
 
 #include "../../../include/core/graphics/drawables/Circle.h"
 #include "../../../include/core/graphics/drawables/BoxButton.h"
 #include "../../../include/core/graphics/drawables/Label.h"
-#include "../../../include/core/graphics/drawables/Container.h"
+#include "../../../include/core/graphics/drawables/containers/Container.h"
 #include "../../../include/core/graphics/drawables/DrawableHitCircle.h"
 
 GameScene::GameScene(Game &game) : game(game){
@@ -40,7 +40,7 @@ GameScene::GameScene(Game &game) : game(game){
     label->rotateTo(0, 360, 4096.f, 1024.f, Easing::EaseInOutQuad);
     playField->addChild(label);
 
-    const auto labelTest = std::make_shared<Label>("Test", font, 64);
+    const auto labelTest = std::make_shared<Label>("Test", font, 128);
     labelTest->setColor(sf::Color::White);
     labelTest->setAnchor(Anchor::TopCenter);
     labelTest->setOrigin(Anchor::TopCenter);

@@ -4,12 +4,13 @@
 
 #include "../../../../include/core/graphics/drawables/Box.h"
 
-Box::Box(const float width, const float height)
-    : width(width), height(height) {}
+Box::Box(const float width, const float height) {
+    setSize({width, height});
+}
 
 void Box::draw(sf::RenderWindow& window) {
-    rect.setSize({width, height});
-    rect.setOrigin(width / 2.f, height / 2.f);
+    rect.setSize(size);
+    rect.setOrigin(size.x / 2.f, size.y / 2.f);
     if (parent) {
         rect.setPosition(parent->getAbsolutePosition(getPosition()));
         rect.setRotation(parent->getRotation() + getRotation());

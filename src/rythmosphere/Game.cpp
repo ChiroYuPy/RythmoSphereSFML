@@ -2,7 +2,7 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../include/core/Game.h"
+#include "../../include/rythmosphere/Game.h"
 
 
 Game::Game() {

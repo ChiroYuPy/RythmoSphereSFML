@@ -6,12 +6,14 @@
 
 #include <iostream>
 
-Circle::Circle(const float radius)
-    : radius(radius) {}
+Circle::Circle(const float radius) : radius(radius) {
+    setSize({radius * 2, radius * 2});
+}
 
 void Circle::draw(sf::RenderWindow& window) {
     circle.setRadius(radius);
-    circle.setOrigin(radius, radius);
+    const sf::Vector2f originPosition = computeAnchor(origin);
+    circle.setOrigin({originPosition.x * size.x, originPosition.y * size.y});
     if (parent) {
         circle.setPosition(parent->getAbsolutePosition(getPosition()));
         circle.setRotation(parent->getRotation() + getRotation());

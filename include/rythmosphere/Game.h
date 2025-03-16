@@ -9,10 +9,10 @@
 
 #include <memory>
 
-#include "managers/AudioManager.h"
-#include "managers/ConfigManager.h"
-#include "managers/TimeManager.h"
-#include "managers/SceneManager.h"
+#include "../core/managers/AudioManager.h"
+#include "../core/managers/ConfigManager.h"
+#include "../core/managers/TimeManager.h"
+#include "../core/managers/SceneManager.h"
 
 class Game {
 public:

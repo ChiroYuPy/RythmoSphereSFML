@@ -6,8 +6,8 @@
 
 #include "../../../include/core/managers/SceneManager.h"
 #include "../../../include/core/scenes/SceneType.h"
-#include "../../../include/core/scenes/MainScene.h"
-#include "../../../include/core/scenes/GameScene.h"
+#include "../../../include/rythmosphere/scenes/MainScene.h"
+#include "../../../include/rythmosphere/scenes/GameScene.h"
 
 SceneManager::SceneManager(Game& game) : game(game) {
     addScene(SceneType::Main, std::make_shared<MainScene>(game));
