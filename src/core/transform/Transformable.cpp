@@ -6,6 +6,8 @@
 
 #include "../../../include/core/transform/Transformable.h"
 
+#include <ranges>
+
 Transformable::Transformable() noexcept
     : anchor(Anchor::Center), rotation(0.f), scale(1.f, 1.f), origin(Anchor::Center) {}
 
@@ -35,6 +37,14 @@ sf::Vector2f Transformable::getAbsolutePosition(const sf::Vector2f& localPositio
     float y_global = getPosition().y + x_scaled * sin_theta + y_scaled * cos_theta;
 
     return {x_global, y_global};
+}
+
+[[nodiscard]] sf::Transform Transformable::getTransform() const {
+    sf::Transform transform;
+    transform.translate(position);
+    transform.rotate(rotation);
+    transform.scale(scale);
+    return transform;
 }
 
 sf::Vector2f Transformable::computeAnchor(const Anchor anchor) {

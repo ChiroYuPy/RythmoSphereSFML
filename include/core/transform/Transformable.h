@@ -72,6 +72,8 @@ public:
 
     [[nodiscard]] sf::Vector2f getAbsolutePosition(const sf::Vector2f &localPosition) const;
 
+    [[nodiscard]] sf::Transform getTransform() const;
+
     [[nodiscard]] static sf::Vector2f computeAnchor(Anchor anchor) ;
 
     void moveTo(const sf::Vector2f &startPosition, const sf::Vector2f &endPosition, float startTime, float duration, const std::

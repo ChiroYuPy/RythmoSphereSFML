@@ -66,7 +66,7 @@ GameScene::GameScene(Game &game) : game(game){
     playField->addChild(drawableHitObject1);
     playField->addChild(drawableHitObject2);
 
-    addObject(playField);
+    addInternal(playField);
 }
 
 void GameScene::initialize() {

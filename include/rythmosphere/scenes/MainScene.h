@@ -9,8 +9,9 @@
 
 #include "../../core/scenes/Scene.h"
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <memory>
+
+#include "../../../include/core/graphics/drawables/Label.h"
+#include "../../../include/rythmosphere/scenes/menu/RythmoSphereLogo.h"
 
 class MainScene final : public Scene {
 public:
@@ -29,6 +30,8 @@ public:
 private:
     Game& game;
     sf::Font font;
+
+    std::shared_ptr<RythmoSphereLogo> logo;
 };
 
 #endif //MAINSCENE_H

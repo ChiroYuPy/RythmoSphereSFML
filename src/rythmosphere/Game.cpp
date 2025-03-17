@@ -20,8 +20,6 @@ void Game::run() const {
     sf::Clock deltaClock;
 
     sceneManager->changeScene(SceneType::Main);
-    sceneManager->changeScene(SceneType::Game);
-
 
     while (window->isOpen()) {
         const sf::Time globalTime = globalClock.getElapsedTime();

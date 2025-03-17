@@ -28,7 +28,7 @@ public:
 
     virtual ~Scene() = default;
 
-    void addObject(const std::shared_ptr<Drawable>& obj) const {
+    void addInternal(const std::shared_ptr<Drawable>& obj) const {
         root->addChild(obj);
     }
 
