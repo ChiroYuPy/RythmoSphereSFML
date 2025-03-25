@@ -14,6 +14,10 @@ Game::Game() {
     audioManager = std::make_unique<AudioManager>(*this);
     timeManager = std::make_unique<TimeManager>(*this);
     sceneManager = std::make_unique<SceneManager>(*this);
+
+    audioManager->loadMusic("/home/adrian/CLionProjects/RythmoSphere/beatmaps/audio.mp3");
+    audioManager->setVolume(0);
+    audioManager->play();
 }
 
 void Game::run() const {

@@ -15,16 +15,24 @@ class Game;
 class AudioManager {
 public:
     explicit AudioManager(Game& game);
+    ~AudioManager();
 
-    void loadMusic(const std::string& file);
-    void playMusic();
-    void pauseMusic();
-    void stopMusic();
-    float getSongPosition() const;
+    bool loadMusic(const std::string& filepath);
+
+    void play();
+    void pause();
+    void stop();
+
+    void setTime(sf::Time time);
+    sf::Time getTime() const;
+    void setLatency(sf::Time latency);
+
+    void setVolume(float volume);
 
 private:
     Game& game;
     sf::Music music;
+    sf::Time latency;
 };
 
 #endif //AUDIOMANAGER_H

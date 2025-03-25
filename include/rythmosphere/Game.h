@@ -22,7 +22,7 @@ public:
 
     void run() const;
 
-    sf::RenderWindow *getRenderWindow() const;
+    [[nodiscard]] sf::RenderWindow *getRenderWindow() const;
 
     [[nodiscard]] ConfigManager* getConfigManager() const;
     [[nodiscard]] AudioManager* getAudioManager() const;
