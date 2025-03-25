@@ -17,7 +17,6 @@ public:
     void update(sf::Time globalTime, sf::Time deltaTime);
 
     void setText(const std::string& newText);
-    void setPosition(float x, float y);
 
 private:
     sf::Text labelText;

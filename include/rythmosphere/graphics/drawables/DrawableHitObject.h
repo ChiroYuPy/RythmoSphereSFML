@@ -7,7 +7,7 @@
 #ifndef DRAWABLEHITOBJECT_H
 #define DRAWABLEHITOBJECT_H
 
-#include "../Drawable.h"
+#include "../../../core/graphics/Drawable.h"
 #include "../../objects/HitObject.h"
 
 class DrawableHitObject : public Drawable {

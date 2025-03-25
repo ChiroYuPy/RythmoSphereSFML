@@ -10,8 +10,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "../../core/managers/FontManager.h"
 #include "../../core/scenes/Scene.h"
-#include "../../core/graphics/drawables/DrawableHitObject.h"
+#include "../../rythmosphere/graphics/drawables/DrawableHitObject.h"
 
 class GameScene final : public Scene {
 public:

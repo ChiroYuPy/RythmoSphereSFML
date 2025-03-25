@@ -8,7 +8,7 @@
 #include <SFML/Graphics/CircleShape.hpp>
 
 #include "HitObject.h"
-#include "../graphics/Drawable.h"
+#include "../../core/graphics/Drawable.h"
 
 class HitCircle final : public HitObject {
 public:

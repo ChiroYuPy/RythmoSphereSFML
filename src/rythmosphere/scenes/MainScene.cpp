@@ -2,8 +2,8 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../../include/rythmosphere/scenes/MainScene.h"
-#include "../../../include/rythmosphere/Game.h"
+#include "rythmosphere/scenes/MainScene.h"
+#include "rythmosphere/Game.h"
 
 MainScene::MainScene(Game &game) : game(game) {
     logo = std::make_shared<RythmoSphereLogo>();
@@ -45,6 +45,8 @@ void MainScene::handleEvent(const sf::Event& event, const sf::RenderWindow& wind
             } else {
                 logo->show();  // Affiche le logo si il est caché
             }
+        } else if (event.mouseButton.button == sf::Mouse::Right) {
+            onClickButton();
         }
     }
 }

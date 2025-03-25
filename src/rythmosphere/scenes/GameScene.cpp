@@ -2,14 +2,14 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../../include/rythmosphere/scenes/GameScene.h"
-#include "../../../include/rythmosphere/Game.h"
+#include "rythmosphere/scenes/GameScene.h"
+#include "rythmosphere/Game.h"
 
-#include "../../../include/core/graphics/drawables/Circle.h"
-#include "../../../include/core/graphics/drawables/BoxButton.h"
-#include "../../../include/core/graphics/drawables/Label.h"
-#include "../../../include/core/graphics/drawables/containers/Container.h"
-#include "../../../include/core/graphics/drawables/DrawableHitCircle.h"
+#include "core/graphics/drawables/Circle.h"
+#include "core/graphics/drawables/BoxButton.h"
+#include "core/graphics/drawables/Label.h"
+#include "core/graphics/drawables/containers/Container.h"
+#include "rythmosphere/graphics/drawables/DrawableHitCircle.h"
 
 GameScene::GameScene(Game &game) : game(game){
     songPosition = 0.f;

@@ -4,34 +4,39 @@
 #include <memory>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "../../../core/managers/FontManager.h"
 #include "../../../core/graphics/drawables/containers/CompositeDrawable.h"
-#include "../../../core/graphics/drawables/BoxButton.h"
+#include "../../../core/graphics/drawables/Label.h"
 #include "../../../core/graphics/drawables/Circle.h"
 
 class RythmoSphereLogo : public CompositeDrawable {
 private:
-    bool isVisible;                // État de visibilité du logo
-    float appearanceDuration;      // Durée de l'apparition du logo
-    std::shared_ptr<Circle> circle; // Exemple d'élément graphique à afficher
+    bool isVisible;
+    float appearanceDuration;
+    std::shared_ptr<Circle> circle;
+    std::shared_ptr<Label> label;
 
 public:
     RythmoSphereLogo() : isVisible(false), appearanceDuration(1024.f) {
-        // Initialisation du logo avec un cercle
-        circle = std::make_shared<Circle>(40);
-        circle->scaleTo({1, 1}, {4, 4}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
-        circle->setColor(sf::Color::Black);
-        circle->colorTo(sf::Color::Black, sf::Color::Red, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+        sf::Font& font = FontManager::getInstance().getFont("main");
 
-        addInternal(circle);  // Ajouter l'élément graphique à la liste
+        circle = std::make_shared<Circle>(40);
+        addInternal(circle);
+
+        label = std::make_shared<Label>("RS Logo", font, 36);
+        addInternal(label);
+
+        show();
     }
 
     // Méthode pour afficher le logo avec animation
     void show() {
         if (!isVisible) {
             isVisible = true;
-            // Animation d'apparition (par exemple, fade-in ou scale-up)
-            circle->colorTo(sf::Color::Red, sf::Color::Black, 0.f, appearanceDuration, Easing::EaseInOutQuad);
-            circle->scaleTo({4, 4}, {1, 1}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+            circle->colorTo(sf::Color::Black, sf::Color::Red, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+            circle->scaleTo({1, 1}, {4, 4}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+            label->colorTo(sf::Color::Black, sf::Color::White, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+            label->scaleTo({0.25, 0.25}, {1, 1}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
         }
     }
 
@@ -40,8 +45,10 @@ public:
         if (isVisible) {
             isVisible = false;
             // Animation de disparition (par exemple, fade-out ou scale-down)
-            circle->colorTo(sf::Color::Black, sf::Color::Red, 0.f, appearanceDuration, Easing::EaseInOutQuad);
-            circle->scaleTo({1, 1}, {4, 4}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+            circle->colorTo(sf::Color::Red, sf::Color::Black, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+            circle->scaleTo({4, 4}, {1, 1}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+            label->colorTo(sf::Color::White, sf::Color::Black, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+            label->scaleTo({1, 1}, {0.25, 0.25}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
         }
     }
 

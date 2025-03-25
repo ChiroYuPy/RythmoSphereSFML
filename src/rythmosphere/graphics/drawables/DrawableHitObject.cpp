@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include "../../../../include/core/graphics/drawables/DrawableHitObject.h"
+#include "rythmosphere/graphics/drawables/DrawableHitObject.h"
 
 DrawableHitObject::DrawableHitObject()
     : hit(false) {}

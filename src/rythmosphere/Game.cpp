@@ -2,12 +2,13 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../include/rythmosphere/Game.h"
+#include "rythmosphere/Game.h"
 
 
 Game::Game() {
     window = std::make_unique<sf::RenderWindow>(sf::VideoMode(800, 600), "RythmoSphere");
     window->setFramerateLimit(330);
+    FontManager::getInstance().loadFont("main", "/home/adrian/CLionProjects/RythmoSphere/assets/fonts/Rubik-Bold.ttf");
 
     configManager = std::make_unique<ConfigManager>(*this);
     audioManager = std::make_unique<AudioManager>(*this);

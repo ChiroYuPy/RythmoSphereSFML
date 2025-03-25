@@ -34,7 +34,3 @@ void Label::update(sf::Time globalTime, sf::Time deltaTime) {
 void Label::setText(const std::string& newText) {
     labelText.setString(newText);
 }
-
-void Label::setPosition(const float x, const float y) {
-    labelText.setPosition(x, y);
-}

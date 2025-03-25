@@ -13,6 +13,7 @@
 #include "../core/managers/ConfigManager.h"
 #include "../core/managers/TimeManager.h"
 #include "../core/managers/SceneManager.h"
+#include "../core/managers/FontManager.h"
 
 class Game {
 public:

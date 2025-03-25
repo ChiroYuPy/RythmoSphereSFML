@@ -2,7 +2,7 @@
 // Created by adrian on 05/03/25.
 //
 
-#include "../../../../include/core/graphics/drawables/DrawableHitCircle.h"
+#include "rythmosphere/graphics/drawables/DrawableHitCircle.h"
 
 DrawableHitCircle::DrawableHitCircle(HitCircle& hitCircle) : hitCircle(hitCircle) {
     setColor(sf::Color::Red);
