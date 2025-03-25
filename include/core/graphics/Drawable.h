@@ -28,8 +28,8 @@ public:
     [[nodiscard]] sf::Color getColor() const { return this->color; }
     void setColor(const sf::Color& color) { this->color = color; }
 
-    void show() { visible = true; }
-    void hide() { visible = false; }
+    virtual void show() { visible = true; }
+    virtual void hide() { visible = false; }
     [[nodiscard]] bool isVisible() const { return visible; }
     void setVisible(const bool visibility) { visible = visibility; }
 };
