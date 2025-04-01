@@ -21,10 +21,6 @@ RythmoSphereLogo::RythmoSphereLogo() : isVisible(false), appearanceDuration(1024
 
 }
 
-void RythmoSphereLogo::enterAction() {
-
-}
-
 void RythmoSphereLogo::show() {
 
     if (!isVisible) {

@@ -6,19 +6,19 @@
 #define CONTAINER_H
 
 #include "../../Drawable.h"
-#include <vector>
-#include <memory>
 
 #include "CompositeDrawable.h"
+#include "../layouts/LayoutBehavior.h"
 
 class Container : public CompositeDrawable {
 protected:
-    std::vector<std::shared_ptr<Drawable>> children;
-    sf::Vector2f size;
+    std::unique_ptr<LayoutBehavior> layout;
     float alpha = 1.0f;
     bool enabled = true;
 
 public:
+    explicit Container(std::unique_ptr<LayoutBehavior> layoutBehavior = nullptr) : layout(std::move(layoutBehavior)) {}
+
     void draw(sf::RenderWindow& window) override;
 
     void update(sf::Time deltaTime) override;

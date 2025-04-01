@@ -2,6 +2,8 @@
 // Created by adrian on 01/04/25.
 //
 
+#include "SFML/Graphics.hpp"
+
 #ifndef ANCHOR_H
 #define ANCHOR_H
 

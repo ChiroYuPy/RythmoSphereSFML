@@ -5,6 +5,8 @@
 #ifndef COMPOSITEDRAWABLE_H
 #define COMPOSITEDRAWABLE_H
 
+#include <iostream>
+
 #include "../../Drawable.h"
 
 
@@ -19,9 +21,9 @@ public:
         drawable->setParent(this);
     }
 
-    void clearChild() {
-        children.clear();
-    };
+    void clearChild() { children.clear(); }
+
+    std::vector<std::shared_ptr<Drawable>>& getChildren() { return children; }
 
     void draw(sf::RenderWindow& window) override {
         for (const auto& child : children) {

@@ -17,8 +17,6 @@ class RythmoSphereLogo : public CompositeDrawable {
 public:
     RythmoSphereLogo();
 
-    void enterAction();
-
     void show() override;
 
     void hide() override;

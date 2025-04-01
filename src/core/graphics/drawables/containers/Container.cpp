@@ -2,9 +2,9 @@
 // Created by adrian on 06/03/25.
 //
 
-#include "../../../../../include/core/graphics/drawables/containers/Container.h"
+#include "core/graphics/drawables/containers/Container.h"
 
-#include <iostream>
+#include "core/transform/Anchor.h"
 
 void Container::draw(sf::RenderWindow& window) {
     if (!visible) return;
@@ -18,9 +18,6 @@ void Container::update(const sf::Time deltaTime) {
 }
 
 void Container::updateLayout(const sf::Time deltaTime) {
-    if (!visible) return;
-    for (const auto child : children) {
-        const sf::Vector2f relative = anchorToRelative(anchor);
-        child->setPosition({relative.x * size.x, relative.y * size.y});
-    }
+    if (!layout) return;
+    layout->arrange(children, position.x, position.y, size.x, size.y);
 }

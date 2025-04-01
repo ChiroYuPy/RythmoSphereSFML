@@ -11,7 +11,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "../graphics/Drawable.h"
-#include "../graphics/drawables/containers/Container.h"
+#include "../graphics/drawables/layouts/AnchorLayout.h"
+#include "../graphics/drawables/containers/Panel.h"
 #include "../graphics/interactive/InteractiveUI.h"
 
 class Game;
@@ -19,11 +20,11 @@ class Game;
 class Scene {
 protected:
     std::vector<std::shared_ptr<InteractiveUI>> interactives;
-    std::shared_ptr<Container> root;
+    std::shared_ptr<Panel> root;
 
 public:
     Scene() {
-        root = std::make_shared<Container>();
+        root = std::make_shared<Panel>(std::make_unique<AnchorLayout>());
     }
 
     virtual ~Scene() = default;
@@ -42,6 +43,7 @@ public:
     }
 
     void render(sf::RenderWindow& window) {
+        root->setSize({static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)});
         root->draw(window);
         onRender(window);
     }
