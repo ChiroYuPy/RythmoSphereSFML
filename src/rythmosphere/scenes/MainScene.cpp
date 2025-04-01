@@ -7,10 +7,6 @@
 
 MainScene::MainScene(Game &game) : game(game) {
     logo = std::make_shared<RythmoSphereLogo>();
-    logo->setPosition({
-        (static_cast<float>(game.getRenderWindow()->getSize().x)) / 2,
-        (static_cast<float>(game.getRenderWindow()->getSize().y)) / 2
-    });
     addInternal(logo);
 }
 
@@ -39,13 +35,6 @@ void MainScene::handleEvent(const sf::Event& event, const sf::RenderWindow& wind
 
     if (event.type == sf::Event::MouseButtonPressed) {
         if (event.mouseButton.button == sf::Mouse::Left) {
-            // On clique sur le logo pour le montrer ou le cacher
-            if (logo->isLogoVisible()) {
-                logo->hide();  // Cache le logo si il est déjà visible
-            } else {
-                logo->show();  // Affiche le logo si il est caché
-            }
-        } else if (event.mouseButton.button == sf::Mouse::Right) {
             onClickButton();
         }
     }
@@ -53,8 +42,9 @@ void MainScene::handleEvent(const sf::Event& event, const sf::RenderWindow& wind
 
 void MainScene::onEnter() {
     auto const label = std::make_shared<Label>("MainScene", font, 24);
+    logo->show();
 }
 
 void MainScene::onExit() {
-
+    logo->hide();
 }

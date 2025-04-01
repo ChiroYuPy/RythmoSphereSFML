@@ -4,15 +4,23 @@
 
 #include "../../../../../include/core/graphics/drawables/containers/Container.h"
 
+#include <iostream>
+
 void Container::draw(sf::RenderWindow& window) {
     if (!visible) return;
-
-    for (const auto& child : children) child->draw(window);
+    CompositeDrawable::draw(window);
 }
 
 void Container::update(const sf::Time deltaTime) {
-    Drawable::update(deltaTime);
     if (!visible) return;
+    CompositeDrawable::update(deltaTime);
+    updateLayout(deltaTime);
+}
 
-    for (const auto& child : children) child->update(deltaTime);
+void Container::updateLayout(const sf::Time deltaTime) {
+    if (!visible) return;
+    for (const auto child : children) {
+        const sf::Vector2f relative = anchorToRelative(anchor);
+        child->setPosition({relative.x * size.x, relative.y * size.y});
+    }
 }

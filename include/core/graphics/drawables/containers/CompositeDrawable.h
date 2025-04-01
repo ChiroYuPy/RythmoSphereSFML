@@ -14,10 +14,14 @@ protected:
     std::vector<std::shared_ptr<Drawable>> children;
 
 public:
-    void addInternal(const std::shared_ptr<Drawable>& drawable) {
+    void addChild(const std::shared_ptr<Drawable>& drawable) {
         children.push_back(drawable);
         drawable->setParent(this);
     }
+
+    void clearChild() {
+        children.clear();
+    };
 
     void draw(sf::RenderWindow& window) override {
         for (const auto& child : children) {
@@ -26,13 +30,11 @@ public:
     }
 
     void update(const sf::Time deltaTime) override {
+        Drawable::update(deltaTime);
         for (const auto& child : children) {
             child->update(deltaTime);
         }
     }
 };
-
-
-
 
 #endif //COMPOSITEDRAWABLE_H

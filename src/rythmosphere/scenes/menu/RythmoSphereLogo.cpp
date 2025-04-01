@@ -8,32 +8,43 @@
 RythmoSphereLogo::RythmoSphereLogo() : isVisible(false), appearanceDuration(1024.f) {
     sf::Font& font = FontManager::getInstance().getFont("main");
 
-    circle = std::make_shared<Circle>(40);
-    addInternal(circle);
+    circleButton = std::make_shared<CircleButton>(40);
+    addChild(circleButton);
 
     label = std::make_shared<Label>("RS Logo", font, 36);
-    addInternal(label);
+    label->setScale({0.25, 0.25});
+    addChild(label);
+
+    setAnchor(Anchor::Center);
 
     RythmoSphereLogo::show();
+
+}
+
+void RythmoSphereLogo::enterAction() {
+
 }
 
 void RythmoSphereLogo::show() {
+
     if (!isVisible) {
         isVisible = true;
-        circle->colorTo(sf::Color::Black, sf::Color::Red, 0.f, appearanceDuration, Easing::EaseInOutQuad);
-        circle->scaleTo({1, 1}, {4, 4}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+        circleButton->colorTo(sf::Color::Black, sf::Color::Red, 0.f, appearanceDuration, Easing::EaseInOutQuad);
         label->colorTo(sf::Color::Black, sf::Color::White, 0.f, appearanceDuration, Easing::EaseInOutQuad);
-        label->scaleTo({0.25, 0.25}, {1, 1}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+
+        scaleTo({1, 1}, {4, 4}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+        rotateTo(0, 360, 0.f, appearanceDuration, Easing::EaseInOutQuad);
     }
 }
 
 void RythmoSphereLogo::hide() {
     if (isVisible) {
         isVisible = false;
-        circle->colorTo(sf::Color::Red, sf::Color::Black, 0.f, appearanceDuration, Easing::EaseInOutQuad);
-        circle->scaleTo({4, 4}, {1, 1}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+        circleButton->colorTo(sf::Color::Red, sf::Color::Black, 0.f, appearanceDuration, Easing::EaseInOutQuad);
         label->colorTo(sf::Color::White, sf::Color::Black, 0.f, appearanceDuration, Easing::EaseInOutQuad);
-        label->scaleTo({1, 1}, {0.25, 0.25}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+
+        scaleTo({4, 4}, {1, 1}, 0.f, appearanceDuration, Easing::EaseInOutQuad);
+        rotateTo(360, 0, 0.f, appearanceDuration, Easing::EaseInOutQuad);
     }
 }
 

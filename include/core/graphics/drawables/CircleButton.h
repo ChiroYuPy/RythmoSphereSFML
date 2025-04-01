@@ -7,12 +7,12 @@
 
 #pragma once
 
-#include "Box.h"
+#include "Circle.h"
 #include "../interactive/Button.h"
 
-class BoxButton final : public Box, public Button {
+class CircleButton final : public Circle, public Button {
 public:
-    explicit BoxButton(float width, float height);
+    explicit CircleButton(float radius);
 
     bool contains(float x, float y) override;
 };

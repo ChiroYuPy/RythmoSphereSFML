@@ -9,7 +9,9 @@
 #include <vector>
 #include <memory>
 
-class Container : public Drawable {
+#include "CompositeDrawable.h"
+
+class Container : public CompositeDrawable {
 protected:
     std::vector<std::shared_ptr<Drawable>> children;
     sf::Vector2f size;
@@ -17,18 +19,11 @@ protected:
     bool enabled = true;
 
 public:
-    void addChild(const std::shared_ptr<Drawable>& child) {
-        child->setParent(this);
-        children.push_back(child);
-    }
-
-    void clearChild() {
-        children.clear();
-    };
-
     void draw(sf::RenderWindow& window) override;
 
     void update(sf::Time deltaTime) override;
+
+    void updateLayout(sf::Time deltaTime);
 
     [[nodiscard]] float getAlpha() const { return alpha; }
     void setAlpha(const float newAlpha) { alpha = newAlpha; }

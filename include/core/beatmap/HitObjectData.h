@@ -26,7 +26,7 @@
 
 struct HitObjectData {
     double startTime;   // Temps d'apparition
-    int type;           // Type d'objet
+    char type;           // Type d'objet
     int hitSound;       // Type de son joué
     int x = 0, y = 0;   // Position (pour HitCircles et Sliders)
     int column = -1;    // Pour osu!mania
